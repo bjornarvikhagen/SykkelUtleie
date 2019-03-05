@@ -1,7 +1,1 @@
-hei
-hei 1
-hei 2
-hei 3
-hei 4
-hei 5
-hei 6
+console.log("test hjemme fra Lukas");
