@@ -34,7 +34,7 @@ class StudentList extends Component {
 
   render() {
     return (
-      <Card title="Students">
+      <Card title="Bookings">
         <List>
           {this.students.map(student => (
             <List.Item key={student.id} to={'/students/' + student.id}>
@@ -61,7 +61,7 @@ class StudentDetails extends Component {
 
     return (
       <div>
-        <Card title="Student details">
+        <Card title="Booking">
           <Row>
             <Column width={2}>Name:</Column>
             <Column>{this.student.name}</Column>
@@ -95,7 +95,7 @@ class StudentEdit extends Component {
 
     return (
       <div>
-        <Card title="Edit student">
+        <Card title="">
           <Form.Label>Name:</Form.Label>
           <Form.Input type="text" value={this.student.name} onChange={e => (this.student.name = e.target.value)} />
           <Form.Label>Email:</Form.Label>
@@ -137,7 +137,7 @@ class StudentNew extends Component {
   render() {
     return (
       <div>
-        <Card title="Edit student">
+        <Card title="Customers">
           <Form.Label>Name:</Form.Label>
           <Form.Input type="text" value={this.name} onChange={event => (this.name = event.target.value)} />
           <Form.Label>Email:</Form.Label>
@@ -171,7 +171,7 @@ class SubjectList extends Component {
 
   render() {
     return (
-      <Card title="Subjects">
+      <Card title="Bikes">
         <List>
           {this.subjects.map(subject => (
             <List.Item key={subject.id} to={'/subjects/' + subject.id}>
@@ -198,7 +198,7 @@ class SubjectDetails extends Component {
 
     return (
       <div>
-        <Card title="Subject details">
+        <Card title="Bike">
           <Row>
             <Column width={2}>Name:</Column>
             <Column>{this.subject.name}</Column>
