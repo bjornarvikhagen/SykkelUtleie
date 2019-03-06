@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Component } from 'react-simplified';
-import ReactDOM from 'react-dom';
-import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { studentService } from './services';
-import { Card, List, Row, Column, NavBar, Button, Form } from './widgets';
+import * as React from "react";
+import { Component } from "react-simplified";
+import ReactDOM from "react-dom";
+import { NavLink, HashRouter, Route } from "react-router-dom";
+import { studentService } from "./services";
+import { Card, List, Row, Column, NavBar, Button, Form } from "./widgets";
 
-import createHashHistory from 'history/createHashHistory';
+import createHashHistory from "history/createHashHistory";
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
 class Menu extends Component {
@@ -35,7 +35,7 @@ class StudentList extends Component {
       <Card title="Students">
         <List>
           {this.students.map(student => (
-            <List.Item key={student.id} to={'/students/' + student.id}>
+            <List.Item key={student.id} to={"/students/" + student.id}>
               {student.name}
             </List.Item>
           ))}
@@ -81,7 +81,7 @@ class StudentDetails extends Component {
   }
 
   edit() {
-    history.push('/students/' + this.student.id + '/edit');
+    history.push("/students/" + this.student.id + "/edit");
   }
 }
 
@@ -95,9 +95,17 @@ class StudentEdit extends Component {
       <div>
         <Card title="Edit student">
           <Form.Label>Name:</Form.Label>
-          <Form.Input type="text" value={this.student.name} onChange={e => (this.student.name = e.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.student.name}
+            onChange={e => (this.student.name = e.target.value)}
+          />
           <Form.Label>Email:</Form.Label>
-          <Form.Input type="text" value={this.student.email} onChange={e => (this.student.email = e.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.student.email}
+            onChange={e => (this.student.email = e.target.value)}
+          />
         </Card>
         <Row>
           <Column>
@@ -119,27 +127,35 @@ class StudentEdit extends Component {
 
   save() {
     studentService.updateStudent(this.student, () => {
-      history.push('/students/' + this.props.match.params.id);
+      history.push("/students/" + this.props.match.params.id);
     });
   }
 
   cancel() {
-    history.push('/students/' + this.props.match.params.id);
+    history.push("/students/" + this.props.match.params.id);
   }
 }
 
 class StudentNew extends Component {
-  name = '';
-  email = '';
+  name = "";
+  email = "";
 
   render() {
     return (
       <div>
         <Card title="Edit student">
           <Form.Label>Name:</Form.Label>
-          <Form.Input type="text" value={this.name} onChange={event => (this.name = event.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.name}
+            onChange={event => (this.name = event.target.value)}
+          />
           <Form.Label>Email:</Form.Label>
-          <Form.Input type="text" value={this.email} onChange={event => (this.email = event.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.email}
+            onChange={event => (this.email = event.target.value)}
+          />
         </Card>
         <Row>
           <Column>
@@ -154,13 +170,18 @@ class StudentNew extends Component {
   }
 
   save() {
-    studentService.newStudent(this.props.match.params.id, this.name, this.email, () => {
-      history.push('/students');
-    });
+    studentService.newStudent(
+      this.props.match.params.id,
+      this.name,
+      this.email,
+      () => {
+        history.push("/students");
+      }
+    );
   }
 
   cancel() {
-    history.push('/students/' + this.props.match.params.id);
+    history.push("/students/" + this.props.match.params.id);
   }
 }
 
@@ -172,7 +193,7 @@ class SubjectList extends Component {
       <Card title="Subjects">
         <List>
           {this.subjects.map(subject => (
-            <List.Item key={subject.id} to={'/subjects/' + subject.id}>
+            <List.Item key={subject.id} to={"/subjects/" + subject.id}>
               {subject.name}
             </List.Item>
           ))}
@@ -218,7 +239,7 @@ class SubjectDetails extends Component {
   }
 
   edit() {
-    history.push('/subjects/' + this.subject.id + '/edit');
+    history.push("/subjects/" + this.subject.id + "/edit");
   }
 }
 
@@ -232,9 +253,17 @@ class SubjectEdit extends Component {
       <div>
         <Card title="Edit subject">
           <Form.Label>Name:</Form.Label>
-          <Form.Input type="text" value={this.subject.name} onChange={e => (this.subject.name = e.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.subject.name}
+            onChange={e => (this.subject.name = e.target.value)}
+          />
           <Form.Label>Subject id:</Form.Label>
-          <Form.Input type="text" value={this.subject.email} onChange={e => (this.subject.email = e.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.subject.email}
+            onChange={e => (this.subject.email = e.target.value)}
+          />
         </Card>
         <Row>
           <Column>
@@ -256,27 +285,35 @@ class SubjectEdit extends Component {
 
   save() {
     studentService.updateSubject(this.subject, () => {
-      history.push('/subjects/' + this.props.match.params.id);
+      history.push("/subjects/" + this.props.match.params.id);
     });
   }
 
   cancel() {
-    history.push('/subjects/' + this.props.match.params.id);
+    history.push("/subjects/" + this.props.match.params.id);
   }
 }
 
 class SubjectNew extends Component {
-  name = '';
-  subid = '';
+  name = "";
+  subid = "";
 
   render() {
     return (
       <div>
         <Card title="Edit student">
           <Form.Label>Name:</Form.Label>
-          <Form.Input type="text" value={this.name} onChange={event => (this.name = event.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.name}
+            onChange={event => (this.name = event.target.value)}
+          />
           <Form.Label>Subject id:</Form.Label>
-          <Form.Input type="text" value={this.subid} onChange={event => (this.subid = event.target.value)} />
+          <Form.Input
+            type="text"
+            value={this.subid}
+            onChange={event => (this.subid = event.target.value)}
+          />
         </Card>
         <Row>
           <Column>
@@ -291,13 +328,18 @@ class SubjectNew extends Component {
   }
 
   save() {
-    studentService.newStudent(this.props.match.params.id, this.name, this.subid, () => {
-      history.push('/subjects');
-    });
+    studentService.newStudent(
+      this.props.match.params.id,
+      this.name,
+      this.subid,
+      () => {
+        history.push("/subjects");
+      }
+    );
   }
 
   cancel() {
-    history.push('/subjects/' + this.props.match.params.id);
+    history.push("/subjects/" + this.props.match.params.id);
   }
 }
 
@@ -316,5 +358,5 @@ ReactDOM.render(
       <Route path="/newsubject" component={SubjectNew} />
     </div>
   </HashRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
