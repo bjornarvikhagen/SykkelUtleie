@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'; 1
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
