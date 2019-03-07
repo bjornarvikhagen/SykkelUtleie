@@ -1,4 +1,4 @@
-import * as React from 'react'; 123
+import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
@@ -33,7 +33,7 @@ class Customers extends Component {
         <List>
           {this.customers.map(customer => (
             <List.Item key={customer.customerID} to={'/customers/' + customer.customerID}>
-              {customer.FirstName}
+              {customer.CustomerID} - {customer.FirstName} {customer.LastName}
             </List.Item>
           ))}
         </List>
@@ -112,8 +112,8 @@ class Bikes extends Component {
       <Card title="Bikes">
         <List>
           {this.bikes.map(bike => (
-            <List.Item key={bike.bikeID} to={'/bikes/' + bike.bikeID}>
-              {bike.Brand}
+            <List.Item key={bike.BikeID} to={'/bikes/' + bike.bikeID}>
+              {bike.BikeID} - {bike.Brand} , {bike.Framesize}''
             </List.Item>
           ))}
         </List>
@@ -126,6 +126,71 @@ class Bikes extends Component {
       this.bikes = bikes;
     });
   }
+
+  edit() {
+    history.push('/bikes/' + this.bike.BikeID + '/edit');
+  }
+}
+
+class BikeDetails extends Component {
+  bike = [];
+
+  render() {
+    if (!this.bike) return null;
+
+    return (
+      <div>
+        <Card title="Bike details">
+          <Row>
+            <Column width={2}>BikeID:</Column>
+            <Column>{this.bike.BikeID}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Brand:</Column>
+            <Column>{this.bike.Brand}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Year:</Column>
+            <Column>{this.bike.Year}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Status:</Column>
+            <Column>{this.bike.Status}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Wheelsize:</Column>
+            <Column>{this.bike.Wheelsize}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Framesize:</Column>
+            <Column>{this.bike.Framesize}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Shiftsystem:</Column>
+            <Column>{this.bike.BikeID}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Information:</Column>
+            <Column>{this.bike.Information}</Column>
+          </Row>
+        </Card>
+        <Row>
+          <Column>
+            <Button.Light onClick={this.edit}>Edit</Button.Light>
+          </Column>
+          <Column right>
+            <Button.Danger onClick={this.delete}>Delete</Button.Danger>
+          </Column>
+        </Row>
+      </div>
+    );
+  }
+
+  mounted() {
+    bikeService.getBike(this.props.match.params.id, bike => {
+      this.bike = bike;
+    });
+  }
 }
 
 ReactDOM.render(
@@ -136,6 +201,7 @@ ReactDOM.render(
       <Route exact path="/customers" component={Customers} />
       <Route exact path="/customers/:id" component={CustomerDetails} />
       <Route exact path="/bikes" component={Bikes} />
+      <Route exact path="/bikes/:id" component={BikeDetails} />
     </div>
   </HashRouter>,
   document.getElementById('root')
