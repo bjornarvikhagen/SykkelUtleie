@@ -5,9 +5,9 @@ export let connection;
 function connect() {
   connection = mysql.createConnection({
     host: 'mysql.stud.iie.ntnu.no',
-    user: 'tobiare',
-    password: 'vhiMPXrN',
-    database: 'tobiare'
+    user: 'g_idri1005_11',
+    password: 'SY3bxHpE',
+    database: 'g_idri1005_11'
   });
 
   // Connect to MySQL-server
