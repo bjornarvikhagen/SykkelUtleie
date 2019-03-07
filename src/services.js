@@ -23,15 +23,15 @@ class BikeService {
     connection.query('select * from Bike', (error, results) => {
       if (error) return console.error(error);
 
-      success(results0[0]);
+      success(results);
     });
   }
 
-  getBikes(BikeID, success) {
-    connection.query('select * from Bike where BikeID = ?', [BikeID], (error, results) => {
+  getBike(BikeID, success) {
+    connection.query('select * from Bike where BikeID = 1', [BikeID], (error, results) => {
       if (error) return console.error(error);
 
-      success(results);
+      success(results[0]);
     });
   }
 }

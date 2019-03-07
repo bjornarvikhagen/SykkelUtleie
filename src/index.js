@@ -104,29 +104,29 @@ class CustomerDetails extends Component {
     });
   }
 }
-//
-// class Bikes extends Component {
-//   bikes = [];
-//   render() {
-//     return (
-//       <Card title="Bikes">
-//         <List>
-//           {this.bikes.map(bike => (
-//             <List.Item key={bike.bikeID} to={'/bikes/' + bike.bikeID}>
-//               {bike.BikeID}
-//             </List.Item>
-//           ))}
-//         </List>
-//       </Card>
-//     );
-//   }
-//
-//   mounted() {
-//     bikeService.getBikes(bikes => {
-//       this.bikes = bikes;
-//     });
-//   }
-// }
+
+class Bikes extends Component {
+  bikes = [];
+  render() {
+    return (
+      <Card title="Bikes">
+        <List>
+          {this.bikes.map(bike => (
+            <List.Item key={bike.bikeID} to={'/bikes/' + bike.bikeID}>
+              {bike.Brand}
+            </List.Item>
+          ))}
+        </List>
+      </Card>
+    );
+  }
+
+  mounted() {
+    bikeService.getBikes(bikes => {
+      this.bikes = bikes;
+    });
+  }
+}
 
 ReactDOM.render(
   <HashRouter>
@@ -135,6 +135,7 @@ ReactDOM.render(
       <Route exact path="/" component={Home} />
       <Route exact path="/customers" component={Customers} />
       <Route exact path="/customers/:id" component={CustomerDetails} />
+      <Route exact path="/bikes" component={Bikes} />
     </div>
   </HashRouter>,
   document.getElementById('root')
