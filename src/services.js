@@ -16,6 +16,28 @@ class CustomerService {
       success(results[0]);
     });
   }
+
+  updateCustomer(CustomerID, success) {
+    connection.query(
+      'update Customer set FirstName=?, LastName=?, Mobile=?, Email=?, Address=?, Zip=?, City=?, Country=? where CustomerID=?',
+      [
+        customer.FirstName,
+        customer.Lastname,
+        customer.Mobile,
+        customer.Email,
+        customer.Address,
+        customer.Zip,
+        customer.City,
+        customer.Country,
+        customer.CustomerID
+      ],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
 }
 
 class BikeService {

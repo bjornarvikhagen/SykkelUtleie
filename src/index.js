@@ -116,6 +116,91 @@ class CustomerDetails extends Component {
       this.customer = customer;
     });
   }
+  edit() {
+    history.push('/customers' + this.customer.CustomerID + '/edit');
+  }
+}
+
+class CustomerEdit extends Component {
+  FirstName = [];
+  LastName = [];
+  Mobile = [];
+  Email = [];
+  Address = [];
+  Zip = [];
+  City = [];
+  Country = [];
+
+  render() {
+    if (!this.customer) return null;
+
+    return (
+      <div>
+        <Card title="Edit Customer">
+          <Form.Label>FirstName:</Form.Label>
+          <Form.Input
+            type="text"
+            value={this.customer.FirstName}
+            onchange={e => (this.customer.FirstName = e.target.value)}
+          />
+          <Form.Label>LastName:</Form.Label>
+          <Form.Input
+            type="text"
+            value={this.customer.LastName}
+            onchange={e => (this.customer.LastName = e.target.value)}
+          />
+          <Form.Label>Mobile:</Form.Label>
+          <Form.Input
+            type="number"
+            value={this.customer.Mobile}
+            onchange={e => (this.customer.Mobile = e.target.value)}
+          />
+          <Form.Label>Email:</Form.Label>
+          <Form.Input type="text" value={this.customer.Email} onchange={e => (this.customer.Email = e.target.value)} />
+          <Form.Label>Address:</Form.Label>
+          <Form.Input
+            type="text"
+            value={this.customer.Address}
+            onchange={e => (this.customer.Address = e.target.value)}
+          />
+          <Form.Label>Zip:</Form.Label>
+          <Form.Input type="number" value={this.customer.Zip} onchange={e => (this.customer.Zip = e.target.value)} />
+          <Form.Label>City:</Form.Label>
+          <Form.Input type="text" value={this.customer.City} onchange={e => (this.customer.City = e.target.value)} />
+          <Form.Label>Country:</Form.Label>
+          <Form.Input
+            type="text"
+            value={this.customer.Country}
+            onchange={e => (this.customer.Country = e.target.value)}
+          />
+        </Card>
+        <Row>
+          <Column>
+            <Button.Success onClick={this.save}>Save</Button.Success>
+          </Column>
+          <Column right>
+            <Button.Light onClick={this.cancel}>Cancel</Button.Light>
+          </Column>
+        </Row>
+      </div>
+    );
+  }
+
+  mounted() {
+    customerService.getCustomer(this.props.match.params.id, customer => {
+      this.customer = customer;
+    });
+  }
+
+  save() {
+    customerService.updateCustomer(this.customer, () => {
+      history.push('/customers/' + this.props.match.params.id);
+    });
+  }
+
+  cancel() {
+    history.push('/students/' + this.props.match.params.id);
+  }
 }
 
 class Bikes extends Component {
@@ -220,6 +305,7 @@ ReactDOM.render(
       <Route exact path="/" component={Home} />
       <Route exact path="/customers" component={Customers} />
       <Route exact path="/customers/:id" component={CustomerDetails} />
+      <Route exact path="/customers/:id/edit" component={CustomerEdit} />
       <Route exact path="/bikes" component={Bikes} />
       <Route exact path="/bikes/:id" component={BikeDetails} />
     </div>
