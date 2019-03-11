@@ -32,7 +32,7 @@ class Customers extends Component {
       <Card title="Customers">
         <List>
           {this.customers.map(customer => (
-            <List.Item key={customer.customerID} to={'/customers/' + customer.customerID}>
+            <List.Item key={customer.CustomerID} to={'/customers/' + customer.CustomerID}>
               {customer.CustomerID} - {customer.FirstName} {customer.LastName}
             </List.Item>
           ))}
@@ -112,7 +112,7 @@ class Bikes extends Component {
       <Card title="Bikes">
         <List>
           {this.bikes.map(bike => (
-            <List.Item key={bike.BikeID} to={'/bikes/' + bike.bikeID}>
+            <List.Item key={bike.BikeID} to={'/bikes/' + bike.BikeID}>
               {bike.BikeID} - {bike.Brand} , {bike.Framesize}''
             </List.Item>
           ))}
@@ -133,7 +133,7 @@ class Bikes extends Component {
 }
 
 class BikeDetails extends Component {
-  bike = [];
+  bike = null;
 
   render() {
     if (!this.bike) return null;
@@ -148,6 +148,10 @@ class BikeDetails extends Component {
           <Row>
             <Column width={2}>Brand:</Column>
             <Column>{this.bike.Brand}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>BikeType:</Column>
+            <Column>{this.bike.FK_BikeTypeID}</Column>
           </Row>
           <Row>
             <Column width={2}>Year:</Column>
@@ -167,7 +171,7 @@ class BikeDetails extends Component {
           </Row>
           <Row>
             <Column width={2}>Shiftsystem:</Column>
-            <Column>{this.bike.BikeID}</Column>
+            <Column>{this.bike.Shiftsystem}</Column>
           </Row>
           <Row>
             <Column width={2}>Information:</Column>

@@ -10,7 +10,7 @@ class CustomerService {
   }
 
   getCustomer(CustomerID, success) {
-    connection.query('select * from Customer where CustomerID=1', [CustomerID], (error, results) => {
+    connection.query('select * from Customer where CustomerID=?', [CustomerID], (error, results) => {
       if (error) return console.error(error);
 
       success(results[0]);
@@ -28,7 +28,7 @@ class BikeService {
   }
 
   getBike(BikeID, success) {
-    connection.query('select * from Bike where BikeID = 1', [BikeID], (error, results) => {
+    connection.query('select * from Bike where BikeID = ?', [BikeID], (error, results) => {
       if (error) return console.error(error);
 
       success(results[0]);
