@@ -29,15 +29,18 @@ class Customers extends Component {
   customers = [];
   render() {
     return (
-      <Card title="Customers">
-        <List>
-          {this.customers.map(customer => (
-            <List.Item key={customer.CustomerID} to={'/customers/' + customer.CustomerID}>
-              {customer.CustomerID} - {customer.FirstName} {customer.LastName}
-            </List.Item>
-          ))}
-        </List>
-      </Card>
+      <div>
+        <Card title="Customers">
+          <List>
+            {this.customers.map(customer => (
+              <List.Item key={customer.CustomerID} to={'/customers/' + customer.CustomerID}>
+                {customer.CustomerID} - {customer.FirstName} {customer.LastName}
+              </List.Item>
+            ))}
+          </List>
+        </Card>
+        <Button.Success onClick={this.new}>New Customer</Button.Success>
+      </div>
     );
   }
 
@@ -45,6 +48,9 @@ class Customers extends Component {
     customerService.getCustomers(customers => {
       this.customers = customers;
     });
+  }
+  new() {
+    history.push('/new_customer');
   }
 }
 
@@ -94,7 +100,14 @@ class CustomerDetails extends Component {
             <Column>{this.customer.Country}</Column>
           </Row>
         </Card>
-        <Button.Light onClick={this.edit}>Edit</Button.Light>
+        <Row>
+          <Column>
+            <Button.Light onClick={this.edit}>Edit</Button.Light>
+          </Column>
+          <Column right>
+            <Button.Danger onClick={this.delete}>Delete</Button.Danger>
+          </Column>
+        </Row>
       </div>
     );
   }
@@ -109,15 +122,18 @@ class Bikes extends Component {
   bikes = [];
   render() {
     return (
-      <Card title="Bikes">
-        <List>
-          {this.bikes.map(bike => (
-            <List.Item key={bike.BikeID} to={'/bikes/' + bike.BikeID}>
-              {bike.BikeID} - {bike.Brand} , {bike.Framesize}''
-            </List.Item>
-          ))}
-        </List>
-      </Card>
+      <div>
+        <Card title="Bikes">
+          <List>
+            {this.bikes.map(bike => (
+              <List.Item key={bike.BikeID} to={'/bikes/' + bike.BikeID}>
+                {bike.BikeID} - {bike.Brand} , {bike.Framesize}''
+              </List.Item>
+            ))}
+          </List>
+        </Card>
+        <Button.Success onClick={this.new}>New Bike</Button.Success>
+      </div>
     );
   }
 
