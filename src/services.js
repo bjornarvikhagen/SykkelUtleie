@@ -17,24 +17,34 @@ class CustomerService {
     });
   }
 
-  updateCustomer(CustomerID, success) {
+  updateCustomer(Customer, success) {
     connection.query(
       'update Customer set FirstName=?, LastName=?, Mobile=?, Email=?, Address=?, Zip=?, City=?, Country=? where CustomerID=?',
       [
-        customer.FirstName,
-        customer.Lastname,
-        customer.Mobile,
-        customer.Email,
-        customer.Address,
-        customer.Zip,
-        customer.City,
-        customer.Country,
-        customer.CustomerID
+        Customer.FirstName,
+        Customer.LastName,
+        Customer.Mobile,
+        Customer.Email,
+        Customer.Address,
+        Customer.Zip,
+        Customer.City,
+        Customer.Country,
+        Customer.CustomerID
       ],
       (error, results) => {
         if (error) return console.error(error);
 
         success();
+      }
+    );
+  }
+
+  newCustomer(FirstName, LastName, Mobile, Email, Address, Zip, City, Country, FK_ReservationID) {
+    connection.query(
+      'insert into Customer (FirstName, LastName, Mobile, Email, Address, Zip, City, Country, FK_ReservationID) values (?, ?, ?, ?, ?, ?, ?, ?,1)',
+      [FirstName, LastName, Mobile, Email, Address, Zip, City, Country, FK_ReservationID],
+      (error, results) => {
+        if (error) return console.error(error);
       }
     );
   }

@@ -55,13 +55,14 @@ class Customers extends Component {
 }
 
 class CustomerDetails extends Component {
-  customer = [];
+  customer = null;
 
   render() {
     if (!this.customer) return null;
 
     return (
       <div>
+        <Button.Light onClick={this.back}>Back</Button.Light>
         <Card title="Customer details">
           <Row>
             <Column width={2}>CustomerID:</Column>
@@ -117,19 +118,67 @@ class CustomerDetails extends Component {
     });
   }
   edit() {
-    history.push('/customers' + this.customer.CustomerID + '/edit');
+    history.push('/customers/' + this.customer.CustomerID + '/edit');
+  }
+  back() {
+    history.push('/customers/');
+  }
+}
+
+class CustomerNew extends Component {
+  FirstName = '';
+  LastName = '';
+  Mobile = '';
+  Email = '';
+  Address = '';
+  Zip = '';
+  City = '';
+  Country = '';
+
+  render() {
+    return (
+      <div>
+        <Card title="New Customer">
+          <Form.Label>FirstName:</Form.Label>
+          <Form.Input type="text" value={this.FirstName} onChange={e => (this.FirstName = e.target.value)} />
+          <Form.Label>LastName:</Form.Label>
+          <Form.Input type="text" value={this.LastName} onChange={e => (this.LastName = e.target.value)} />
+          <Form.Label>Mobile:</Form.Label>
+          <Form.Input type="number" value={this.Mobile} onChange={e => (this.Mobile = e.target.value)} />
+          <Form.Label>Email:</Form.Label>
+          <Form.Input type="text" value={this.Email} onChange={e => (this.Email = e.target.value)} />
+          <Form.Label>Address:</Form.Label>
+          <Form.Input type="text" value={this.Address} onChange={e => (this.Address = e.target.value)} />
+          <Form.Label>Zip:</Form.Label>
+          <Form.Input type="number" value={this.Zip} onChange={e => (this.Zip = e.target.value)} />
+          <Form.Label>City:</Form.Label>
+          <Form.Input type="text" value={this.City} onChange={e => (this.City = e.target.value)} />
+          <Form.Label>Country:</Form.Label>
+          <Form.Input type="text" value={this.Country} onChange={e => (this.Country = e.target.value)} />
+        </Card>
+        <Button.Success onClick={this.add}>Add</Button.Success>
+      </div>
+    );
+  }
+  add() {
+    customerService.newCustomer(
+      this.FirstName,
+      this.LastName,
+      this.Mobile,
+      this.Email,
+      this.Address,
+      this.Zip,
+      this.City,
+      this.Country,
+      CustomerID => {
+        history.push('/customers');
+      }
+    );
   }
 }
 
 class CustomerEdit extends Component {
-  FirstName = [];
-  LastName = [];
-  Mobile = [];
-  Email = [];
-  Address = [];
-  Zip = [];
-  City = [];
-  Country = [];
+  customer = null;
 
   render() {
     if (!this.customer) return null;
@@ -141,37 +190,37 @@ class CustomerEdit extends Component {
           <Form.Input
             type="text"
             value={this.customer.FirstName}
-            onchange={e => (this.customer.FirstName = e.target.value)}
+            onChange={e => (this.customer.FirstName = e.target.value)}
           />
           <Form.Label>LastName:</Form.Label>
           <Form.Input
             type="text"
             value={this.customer.LastName}
-            onchange={e => (this.customer.LastName = e.target.value)}
+            onChange={e => (this.customer.LastName = e.target.value)}
           />
           <Form.Label>Mobile:</Form.Label>
           <Form.Input
             type="number"
             value={this.customer.Mobile}
-            onchange={e => (this.customer.Mobile = e.target.value)}
+            onChange={e => (this.customer.Mobile = e.target.value)}
           />
           <Form.Label>Email:</Form.Label>
-          <Form.Input type="text" value={this.customer.Email} onchange={e => (this.customer.Email = e.target.value)} />
+          <Form.Input type="text" value={this.customer.Email} onChange={e => (this.customer.Email = e.target.value)} />
           <Form.Label>Address:</Form.Label>
           <Form.Input
             type="text"
             value={this.customer.Address}
-            onchange={e => (this.customer.Address = e.target.value)}
+            onChange={e => (this.customer.Address = e.target.value)}
           />
           <Form.Label>Zip:</Form.Label>
-          <Form.Input type="number" value={this.customer.Zip} onchange={e => (this.customer.Zip = e.target.value)} />
+          <Form.Input type="number" value={this.customer.Zip} onChange={e => (this.customer.Zip = e.target.value)} />
           <Form.Label>City:</Form.Label>
-          <Form.Input type="text" value={this.customer.City} onchange={e => (this.customer.City = e.target.value)} />
+          <Form.Input type="text" value={this.customer.City} onChange={e => (this.customer.City = e.target.value)} />
           <Form.Label>Country:</Form.Label>
           <Form.Input
             type="text"
             value={this.customer.Country}
-            onchange={e => (this.customer.Country = e.target.value)}
+            onChange={e => (this.customer.Country = e.target.value)}
           />
         </Card>
         <Row>
@@ -199,7 +248,7 @@ class CustomerEdit extends Component {
   }
 
   cancel() {
-    history.push('/students/' + this.props.match.params.id);
+    history.push('/customers/' + this.props.match.params.id);
   }
 }
 
@@ -305,6 +354,7 @@ ReactDOM.render(
       <Route exact path="/" component={Home} />
       <Route exact path="/customers" component={Customers} />
       <Route exact path="/customers/:id" component={CustomerDetails} />
+      <Route exact path="/new_customer" component={CustomerNew} />
       <Route exact path="/customers/:id/edit" component={CustomerEdit} />
       <Route exact path="/bikes" component={Bikes} />
       <Route exact path="/bikes/:id" component={BikeDetails} />
