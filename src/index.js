@@ -277,9 +277,8 @@ class Bikes extends Component {
       this.bikes = bikes;
     });
   }
-
-  edit() {
-    history.push('/bikes/' + this.bike.BikeID + '/edit');
+  new() {
+    history.push('/new_bike');
   }
 }
 
@@ -346,8 +345,8 @@ class BikeDetails extends Component {
       this.bike = bike;
     });
   }
-  delete() {
-    bikeService.deleteBike(this.props.match.params.id, () => history.push('/bikes'));
+  edit() {
+    history.push('/bikes/' + this.bike.BikeID + '/edit');
   }
 }
 
