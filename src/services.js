@@ -48,6 +48,13 @@ class CustomerService {
       }
     );
   }
+  deleteCustomer(CustomerID, success) {
+    connection.query('delete from Customer where CustomerID = ?', [CustomerID], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
 }
 
 class BikeService {

@@ -123,6 +123,9 @@ class CustomerDetails extends Component {
   back() {
     history.push('/customers/');
   }
+  delete() {
+    customerService.deleteCustomer(this.props.match.params.id, () => history.push('/customers'));
+  }
 }
 
 class CustomerNew extends Component {
