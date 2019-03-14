@@ -159,11 +159,12 @@ class CustomerNew extends Component {
           <Form.Label>Country:</Form.Label>
           <Form.Input type="text" value={this.Country} onChange={e => (this.Country = e.target.value)} />
         </Card>
-        <Button.Success onClick={this.add}>Add</Button.Success>
+        <Button.Success onClick={this.save}>Save</Button.Success>
       </div>
     );
   }
-  add() {
+  save() {
+    history.push('/customers');
     customerService.newCustomer(
       this.FirstName,
       this.LastName,
@@ -172,10 +173,7 @@ class CustomerNew extends Component {
       this.Address,
       this.Zip,
       this.City,
-      this.Country,
-      CustomerID => {
-        history.push('/customers');
-      }
+      this.Country
     );
   }
 }
@@ -347,6 +345,9 @@ class BikeDetails extends Component {
     bikeService.getBike(this.props.match.params.id, bike => {
       this.bike = bike;
     });
+  }
+  delete() {
+    bikeService.deleteBike(this.props.match.params.id, () => history.push('/bikes'));
   }
 }
 
