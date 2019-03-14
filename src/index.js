@@ -351,6 +351,100 @@ class BikeDetails extends Component {
   }
 }
 
+class BikeEdit extends Component {
+  bike = null;
+
+  render() {
+    if (!this.bike) return null;
+
+    return (
+      <div>
+        <Card title="Edit bike">
+          <Form.Label>Status:</Form.Label>
+          <Form.Input type="text" value={this.bike.Status} onChange={e => (this.bike.Status = e.target.value)} />
+        </Card>
+        <Row>
+          <Column>
+            <Button.Success onClick={this.save}>Save</Button.Success>
+          </Column>
+          <Column right>
+            <Button.Light onClick={this.cancel}>Cancel</Button.Light>
+          </Column>
+        </Row>
+      </div>
+    );
+  }
+
+  mounted() {
+    bikeService.getBike(this.props.match.params.id, bike => {
+      this.bike = bike;
+    });
+  }
+
+  save() {
+    bikeService.updateBike(this.bike, () => {
+      history.push('/bikes/' + this.props.match.params.id);
+    });
+  }
+
+  cancel() {
+    history.push('/bikes/' + this.props.match.params.id);
+  }
+}
+
+class BikeNew extends Component {
+  Brand = '';
+  Year = '';
+  Status = '';
+  Wheelsize = '';
+  Framesize = '';
+  Shiftsystem = '';
+  Information = '';
+  FK_Location = '';
+  FK_BikeTypeID = '';
+
+  render() {
+    return (
+      <div>
+        <Card title="New Bike">
+          <Form.Label>Brand:</Form.Label>
+          <Form.Input type="text" value={this.Brand} onChange={e => (this.Brand = e.target.value)} />
+          <Form.Label>Year:</Form.Label>
+          <Form.Input type="number" value={this.Year} onChange={e => (this.Year = e.target.value)} />
+          <Form.Label>Status:</Form.Label>
+          <Form.Input type="number" value={this.Status} onChange={e => (this.Status = e.target.value)} />
+          <Form.Label>Wheelsize:</Form.Label>
+          <Form.Input type="number" value={this.Wheelsize} onChange={e => (this.Wheelsize = e.target.value)} />
+          <Form.Label>Framesize:</Form.Label>
+          <Form.Input type="number" value={this.Framesize} onChange={e => (this.Framesize = e.target.value)} />
+          <Form.Label>Shiftsystem:</Form.Label>
+          <Form.Input type="text" value={this.Shiftsystem} onChange={e => (this.Shiftsystem = e.target.value)} />
+          <Form.Label>Information:</Form.Label>
+          <Form.Input type="text" value={this.Informatioin} onChange={e => (this.Information = e.target.value)} />
+          <Form.Label>Location:</Form.Label>
+          <Form.Input type="number" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)} />
+          <Form.Label>Bike type:</Form.Label>
+          <Form.Input type="number" value={this.FK_BikeTypeID} onChange={e => (this.FK_BikeTypeID = e.target.value)} />
+        </Card>
+        <Button.Success onClick={this.add}>Add</Button.Success>
+      </div>
+    );
+  }
+  add() {
+    history.push('/bikes');
+    bikeService.newBike(
+      this.Brand,
+      this.Year,
+      this.Status,
+      this.Wheelsize,
+      this.Shiftsystem,
+      this.Information,
+      this.FK_Location,
+      this.FK_BikeTypeID
+    );
+  }
+}
+
 ReactDOM.render(
   <HashRouter>
     <div>
@@ -362,6 +456,8 @@ ReactDOM.render(
       <Route exact path="/customers/:id/edit" component={CustomerEdit} />
       <Route exact path="/bikes" component={Bikes} />
       <Route exact path="/bikes/:id" component={BikeDetails} />
+      <Route exact path="/new_bike" component={BikeNew} />
+      <Route exact path="/bikes/:id/edit" component={BikeEdit} />
     </div>
   </HashRouter>,
   document.getElementById('root')

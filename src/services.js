@@ -74,12 +74,23 @@ class BikeService {
       success(results[0]);
     });
   }
-  deleteBike(BikeID, success) {
-    connection.query('delete from Bike where BikeID = ?', [BikeID], (error, results) => {
+
+  updateBike(Bike, success) {
+    connection.query('update Bike set status=? where BikeID=?', [Bike.Status, Bike.BikeID], (error, results) => {
       if (error) return console.error(error);
 
       success();
     });
+  }
+
+  newBike(Brand, Year, Status, Wheelsize, Framesize, Shiftsystem, Information, FK_Location, FK_BikeTypeID) {
+    connection.query(
+      'insert into Bike (Brand, Year, Status, Wheelsize, Framesize, Shiftsystem, Information, FK_Location, FK_BikeTypeID) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [Brand, Year, Status, Wheelsize, Framesize, Shiftsystem, Information, FK_Location, FK_BikeTypeID],
+      (error, results) => {
+        if (error) return console.error(error);
+      }
+    );
   }
 }
 export let customerService = new CustomerService();
