@@ -330,7 +330,7 @@ class BikeDetails extends Component {
         </Card>
         <Row>
           <Column>
-            <Button.Light onClick={this.edit}>Edit</Button.Light>
+            <Button.Light onClick={this.edit}>Update bike status</Button.Light>
           </Column>
           <Column right>
             <Button.Danger onClick={this.delete}>Delete</Button.Danger>
@@ -348,6 +348,9 @@ class BikeDetails extends Component {
   edit() {
     history.push('/bikes/' + this.bike.BikeID + '/edit');
   }
+  delete() {
+    bikeService.deleteBike(this.props.match.params.id, () => history.push('/bikes'));
+  }
 }
 
 class BikeEdit extends Component {
@@ -358,7 +361,7 @@ class BikeEdit extends Component {
 
     return (
       <div>
-        <Card title="Edit bike">
+        <Card title="Update status">
           <Form.Label>Status:</Form.Label>
           <Form.Input type="text" value={this.bike.Status} onChange={e => (this.bike.Status = e.target.value)} />
         </Card>
@@ -436,6 +439,7 @@ class BikeNew extends Component {
       this.Year,
       this.Status,
       this.Wheelsize,
+      this.Framesize,
       this.Shiftsystem,
       this.Information,
       this.FK_Location,

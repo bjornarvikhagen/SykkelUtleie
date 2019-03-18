@@ -92,6 +92,14 @@ class BikeService {
       }
     );
   }
+
+  deleteBike(BikeID, success) {
+    connection.query('delete from Bike where BikeID = ?', [BikeID], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
 }
 export let customerService = new CustomerService();
 export let bikeService = new BikeService();
