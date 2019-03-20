@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { customerService, bikeService, bookingService } from './services';
+import { customerService, bikeService, bookingService, locationService } from './services';
 import { Card, List, Row, Column, NavBar, Button, Form } from './widgets';
 
 import createHashHistory from 'history/createHashHistory';
@@ -15,6 +15,7 @@ class Menu extends Component {
         <NavBar.Link to="/customers">Customers</NavBar.Link>
         <NavBar.Link to="/bikes">Bikes</NavBar.Link>
         <NavBar.Link to="/bookings">Bookings</NavBar.Link>
+        <NavBar.Link to="/locations">Locations</NavBar.Link>
       </NavBar>
     );
   }
@@ -473,6 +474,78 @@ class Bookings extends Component {
   }
 }
 
+class Locations extends Component {
+  locations = [];
+  render() {
+    return (
+      <div>
+        <Card title="Locations">
+          <List>
+            {this.locations.map(location => (
+              <List.Item key={location.LocationID} to={'/locations/' + location.LocationID}>
+                {location.LocationID} - {location.Place} , {location.Address}''
+              </List.Item>
+            ))}
+          </List>
+        </Card>
+      </div>
+    );
+  }
+
+  mounted() {
+    locationService.getLocations(locations => {
+      this.locations = locations;
+      });
+    }
+  }
+
+  class LocationDetails extends Component {
+    location = null;
+
+    render() {
+      if (!this.location) return null;
+
+      return (
+        <div>
+          <Button.Light onClick={this.back}>Back</Button.Light>
+          <Card title="Location details">
+            <Row>
+              <Column width={2}>LocationID:</Column>
+              <Column>{this.location.LocationID}</Column>
+            </Row>
+            <Row>
+              <Column width={2}>Address:</Column>
+              <Column>{this.location.Address}</Column>
+            </Row>
+            <Row>
+              <Column width={2}>Zip:</Column>
+              <Column>{this.location.Zip}</Column>
+            </Row>
+            <Row>
+              <Column width={2}>Place:</Column>
+              <Column> {this.location.Place}</Column>
+            </Row>
+
+          </Card>
+          <Row>
+            <Column>
+              <Button.Light onClick={this.edit}>Edit</Button.Light>
+            </Column>
+            <Column right>
+              <Button.Danger onClick={this.delete}>Delete</Button.Danger>
+            </Column>
+          </Row>
+        </div>
+      );
+    }
+    mounted() {
+      locationService.getLocation(this.props.match.params.id, location => {
+        this.location = location;
+      });
+    }
+    }
+
+
 ReactDOM.render(
   <HashRouter>
     <div>
@@ -487,6 +560,8 @@ ReactDOM.render(
       <Route exact path="/new_bike" component={BikeNew} />
       <Route exact path="/bikes/:id/edit" component={BikeEdit} />
       <Route exact path="/bookings/" component={Bookings} />
+      <Route exact path="/locations/" component={Locations} />
+      <Route exact path="/locations/:id" component={LocationDetails} />
     </div>
   </HashRouter>,
   document.getElementById('root')

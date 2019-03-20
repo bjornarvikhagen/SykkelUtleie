@@ -111,6 +111,27 @@ class BookingService {
     });
   }
 }
+
+class LocationService {
+  getLocations(success) {
+    connection.query('select * from Location', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+getLocation(LocationID, success) {
+  connection.query('select * from Location where LocationID=?', [LocationID], (error, results) => {
+    if (error) return console.error(error);
+
+    success(results[0]);
+  });
+}
+}
+
+
 export let customerService = new CustomerService();
 export let bikeService = new BikeService();
 export let bookingService = new BookingService();
+export let locationService = new LocationService();
