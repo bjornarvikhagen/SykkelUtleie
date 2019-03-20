@@ -39,10 +39,10 @@ class CustomerService {
     );
   }
 
-  newCustomer(FirstName, LastName, Mobile, Email, Address, Zip, City, Country, FK_ReservationID) {
+  newCustomer(FirstName, LastName, Mobile, Email, Address, Zip, City, Country) {
     connection.query(
-      'insert into Customer (FirstName, LastName, Mobile, Email, Address, Zip, City, Country, FK_ReservationID) values (?, ?, ?, ?, ?, ?, ?, ?,1)',
-      [FirstName, LastName, Mobile, Email, Address, Zip, City, Country, FK_ReservationID],
+      'insert into Customer (FirstName, LastName, Mobile, Email, Address, Zip, City, Country) values (?, ?, ?, ?, ?, ?, ?, ?)',
+      [FirstName, LastName, Mobile, Email, Address, Zip, City, Country],
       (error, results) => {
         if (error) return console.error(error);
       }
@@ -101,5 +101,16 @@ class BikeService {
     });
   }
 }
+
+class BookingService {
+  getBookings(success) {
+    connection.query('select * from Rentals', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+}
 export let customerService = new CustomerService();
 export let bikeService = new BikeService();
+export let bookingService = new BookingService();

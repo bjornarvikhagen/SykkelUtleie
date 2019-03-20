@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { customerService, bikeService } from './services';
+import { customerService, bikeService, bookingService } from './services';
 import { Card, List, Row, Column, NavBar, Button, Form } from './widgets';
 
 import createHashHistory from 'history/createHashHistory';
@@ -14,6 +14,7 @@ class Menu extends Component {
       <NavBar brand="AS SykkelUtleie">
         <NavBar.Link to="/customers">Customers</NavBar.Link>
         <NavBar.Link to="/bikes">Bikes</NavBar.Link>
+        <NavBar.Link to="/bookings">Bookings</NavBar.Link>
       </NavBar>
     );
   }
@@ -448,6 +449,30 @@ class BikeNew extends Component {
   }
 }
 
+class Bookings extends Component {
+  rentals = [];
+  render() {
+    return (
+      <div>
+        <Card title="Bookings">
+          <List>
+            {this.rentals.map(rental => (
+              <List.Item key={rental.RentalID} to={'/bookings/' + rental.RentalID}>
+                {rental.RentalID}
+              </List.Item>
+            ))}
+          </List>
+        </Card>
+      </div>
+    );
+  }
+  mounted() {
+    bookingService.getBookings(rentals => {
+      this.rentals = rentals;
+    });
+  }
+}
+
 ReactDOM.render(
   <HashRouter>
     <div>
@@ -461,6 +486,7 @@ ReactDOM.render(
       <Route exact path="/bikes/:id" component={BikeDetails} />
       <Route exact path="/new_bike" component={BikeNew} />
       <Route exact path="/bikes/:id/edit" component={BikeEdit} />
+      <Route exact path="/bookings/" component={Bookings} />
     </div>
   </HashRouter>,
   document.getElementById('root')
