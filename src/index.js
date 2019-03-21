@@ -473,6 +473,36 @@ class Bookings extends Component {
     });
   }
 }
+class BookingDetails extends Component {
+  rental = [];
+
+  render() {
+    if (!this.rental) return null;
+
+    return (
+      <div>
+        <ul>
+          <li> RentalID: {this.rental.RentalID} </li>
+          <li> StartDate: {this.rental.toString().StartDate} </li>
+          <li> EndDate: {this.rental.toString().EndDate} </li>
+          <li> CustomerID: {this.rental.FK_CustomerID} </li>
+          <li> BikeID: {this.rental.FK_BikeID} </li>
+          <li> PickupID: {this.rental.FK_PickupID} </li>
+          <li> DropoffID: {this.rental.FK_DropoffID} </li>
+          <li> Accessories: {this.rental.FK_AccessoriesID} </li>
+          <li> Invoice ID: {this.rental.FK_InvoiceID} </li>
+          <li> BikeTypeID: {this.rental.FK_BikeTypeID} </li>
+        </ul>
+      </div>
+    );
+  }
+
+  mounted() {
+    bookingService.getBooking(this.props.match.params.id, rental => {
+      this.rental = rental;
+    });
+  }
+}
 
 class Locations extends Component {
   locations = [];
@@ -495,56 +525,54 @@ class Locations extends Component {
   mounted() {
     locationService.getLocations(locations => {
       this.locations = locations;
-      });
-    }
+    });
   }
+}
 
-  class LocationDetails extends Component {
-    location = null;
+class LocationDetails extends Component {
+  location = null;
 
-    render() {
-      if (!this.location) return null;
+  render() {
+    if (!this.location) return null;
 
-      return (
-        <div>
-          <Button.Light onClick={this.back}>Back</Button.Light>
-          <Card title="Location details">
-            <Row>
-              <Column width={2}>LocationID:</Column>
-              <Column>{this.location.LocationID}</Column>
-            </Row>
-            <Row>
-              <Column width={2}>Address:</Column>
-              <Column>{this.location.Address}</Column>
-            </Row>
-            <Row>
-              <Column width={2}>Zip:</Column>
-              <Column>{this.location.Zip}</Column>
-            </Row>
-            <Row>
-              <Column width={2}>Place:</Column>
-              <Column> {this.location.Place}</Column>
-            </Row>
-
-          </Card>
+    return (
+      <div>
+        <Button.Light onClick={this.back}>Back</Button.Light>
+        <Card title="Location details">
           <Row>
-            <Column>
-              <Button.Light onClick={this.edit}>Edit</Button.Light>
-            </Column>
-            <Column right>
-              <Button.Danger onClick={this.delete}>Delete</Button.Danger>
-            </Column>
+            <Column width={2}>LocationID:</Column>
+            <Column>{this.location.LocationID}</Column>
           </Row>
-        </div>
-      );
-    }
-    mounted() {
-      locationService.getLocation(this.props.match.params.id, location => {
-        this.location = location;
-      });
-    }
-    }
-
+          <Row>
+            <Column width={2}>Address:</Column>
+            <Column>{this.location.Address}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Zip:</Column>
+            <Column>{this.location.Zip}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Place:</Column>
+            <Column> {this.location.Place}</Column>
+          </Row>
+        </Card>
+        <Row>
+          <Column>
+            <Button.Light onClick={this.edit}>Edit</Button.Light>
+          </Column>
+          <Column right>
+            <Button.Danger onClick={this.delete}>Delete</Button.Danger>
+          </Column>
+        </Row>
+      </div>
+    );
+  }
+  mounted() {
+    locationService.getLocation(this.props.match.params.id, location => {
+      this.location = location;
+    });
+  }
+}
 
 ReactDOM.render(
   <HashRouter>
@@ -560,6 +588,7 @@ ReactDOM.render(
       <Route exact path="/new_bike" component={BikeNew} />
       <Route exact path="/bikes/:id/edit" component={BikeEdit} />
       <Route exact path="/bookings/" component={Bookings} />
+      <Route exact path="/bookings/:id" component={BookingDetails} />
       <Route exact path="/locations/" component={Locations} />
       <Route exact path="/locations/:id" component={LocationDetails} />
     </div>

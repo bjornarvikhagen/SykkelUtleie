@@ -110,6 +110,13 @@ class BookingService {
       success(results);
     });
   }
+  getBooking(RentalID, success) {
+    connection.query('select * from Rentals where RentalID = ?', [RentalID], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results[0]);
+    });
+  }
 }
 
 class LocationService {
@@ -121,15 +128,14 @@ class LocationService {
     });
   }
 
-getLocation(LocationID, success) {
-  connection.query('select * from Location where LocationID=?', [LocationID], (error, results) => {
-    if (error) return console.error(error);
+  getLocation(LocationID, success) {
+    connection.query('select * from Location where LocationID=?', [LocationID], (error, results) => {
+      if (error) return console.error(error);
 
-    success(results[0]);
-  });
+      success(results[0]);
+    });
+  }
 }
-}
-
 
 export let customerService = new CustomerService();
 export let bikeService = new BikeService();
