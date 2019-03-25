@@ -100,6 +100,28 @@ class BikeService {
       success();
     });
   }
+
+  getBikesS1(success) {
+    connection.query('select * from Bike where Status = 1', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+  getBikesS2(success) {
+    connection.query('select * from Bike where Status = 2', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+  moveBike(Status, BikeID, success) {
+    connection.query('UPDATE Bike SET Status = ? WHERE BikeID = ?',[Status ,BikeID],(error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
 }
 
 class BookingService {
@@ -163,28 +185,6 @@ class LocationService {
       if (error) return console.error(error);
 
       success(results[0]);
-    });
-  }
-
-  getBikesS1(success) {
-    connection.query('select * from Bike where Status = 1', (error, results) => {
-      if (error) return console.error(error);
-
-      success(results);
-    });
-  }
-  getBikesS2(success) {
-    connection.query('select * from Bike where Status = 2', (error, results) => {
-      if (error) return console.error(error);
-
-      success(results);
-    });
-  }
-  moveBike(Status, BikeID, success) {
-    connection.query('UPDATE Bike SET Status = ? WHERE BikeID = ?',[Status ,BikeID],(error, results) => {
-      if (error) return console.error(error);
-
-      success();
     });
   }
 }
