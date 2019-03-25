@@ -117,6 +117,36 @@ class BookingService {
       success(results[0]);
     });
   }
+
+  newBooking(
+    StartDate,
+    EndDate,
+    FK_CustomerID,
+    FK_BikeID,
+    FK_PickupID,
+    FK_DropoffID,
+    FK_Accessories,
+    FK_InvoiceID,
+    FK_BikeTypeID
+  ) {
+    connection.query(
+      'insert into Rentals (StartDate, EndDate, FK_CustomerID, FK_BikeID, FK_PickupID, FK_DropoffID, FK_Accessories, FK_InvoiceID, FK_BikeTypeID) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [
+        StartDate,
+        EndDate,
+        FK_CustomerID,
+        FK_BikeID,
+        FK_PickupID,
+        FK_DropoffID,
+        FK_Accessories,
+        FK_InvoiceID,
+        FK_BikeTypeID
+      ],
+      (error, results) => {
+        if (error) return console.error(error);
+      }
+    );
+  }
 }
 
 class LocationService {
