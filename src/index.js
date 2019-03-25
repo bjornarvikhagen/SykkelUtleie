@@ -16,6 +16,7 @@ class Menu extends Component {
         <NavBar.Link to="/bikes">Bikes</NavBar.Link>
         <NavBar.Link to="/bookings">Bookings</NavBar.Link>
         <NavBar.Link to="/locations">Locations</NavBar.Link>
+        <NavBar.Link to="/maintenance">Maintenance</NavBar.Link>
       </NavBar>
     );
   }
@@ -632,6 +633,66 @@ class LocationDetails extends Component {
   }
 }
 
+class Maintenance extends Component {
+  bikes1 = [];
+  bikes2 = [];
+  render() {
+    return (
+      <div>
+      {console.log(this.bikes1)}
+      {console.log(this.bikes2)}
+
+        <Card title="Maintenance" class="liste">
+        <Row>
+        <Column>
+          <List>
+            {this.bikes1.map(bike1 => (
+              <List.Item key={bike1.BikeID}>
+                {bike1.BikeID} - {bike1.Status} , {bike1.Information}
+                <Button.Success id={bike1.BikeID} value={bike1.BikeID} onClick={() => this.move(2, bike1.BikeID)}>Move to Status 2</Button.Success>
+              </List.Item>
+            ))}
+          </List>
+          </Column>
+
+          <Column>
+          <List>
+            {this.bikes2.map(bike2 => (
+              <List.Item key={bike2.BikeID}>
+                {bike2.BikeID} - {bike2.Status} , {bike2.Information}
+                <Button.Danger id={bike2.BikeID} value={bike2.BikeID} onClick={() => this.move(1, bike2.BikeID)}>Move to Status 1</Button.Danger>
+              </List.Item>
+            ))}
+          </List>
+          </Column>
+          </Row>
+        </Card>
+      </div>
+    );
+  }
+
+  mounted() {
+    bikeService.getBikesS1(bikes1 => {
+      this.bikes1 = bikes1;
+    });
+    bikeService.getBikesS2(bikes2 => {
+      this.bikes2 = bikes2;
+    });
+  }
+  move(Status, BikeID) {
+    console.log(Status, BikeID);
+    bikeService.moveBike(Status, BikeID, () => {
+      bikeService.getBikesS1(bikes1 => {
+        this.bikes1 = bikes1;
+      });
+      bikeService.getBikesS2(bikes2 => {
+        this.bikes2 = bikes2;
+      });
+    });
+  }
+
+}
+
 ReactDOM.render(
   <HashRouter>
     <div>
@@ -650,6 +711,7 @@ ReactDOM.render(
       <Route exact path="/new_booking" component={BookingNew} />
       <Route exact path="/locations/" component={Locations} />
       <Route exact path="/locations/:id" component={LocationDetails} />
+      <Route exact path="/maintenance" component={Maintenance} />
     </div>
   </HashRouter>,
   document.getElementById('root')
