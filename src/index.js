@@ -487,8 +487,8 @@ class BookingDetails extends Component {
       <div>
         <ul>
           <li> RentalID: {this.rental.RentalID} </li>
-          <li> StartDate: {this.rental.tooString().StartDate} </li>
-          <li> EndDate: {this.rental.tooString().EndDate} </li>
+          <li> StartDate: {this.rental.toString().StartDate} </li>
+          <li> EndDate: {this.rental.toString().EndDate} </li>
           <li> CustomerID: {this.rental.FK_CustomerID} </li>
           <li> BikeID: {this.rental.FK_BikeID} </li>
           <li> PickupID: {this.rental.FK_PickupID} </li>
