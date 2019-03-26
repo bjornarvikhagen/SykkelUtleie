@@ -367,6 +367,12 @@ class BikeEdit extends Component {
         <Card title="Update status">
           <Form.Label>Status:</Form.Label>
           <Form.Input type="text" value={this.bike.Status} onChange={e => (this.bike.Status = e.target.value)} />
+          <Form.Label>Information:</Form.Label>
+          <Form.Input
+            type="text"
+            value={this.bike.Information}
+            onChange={e => (this.bike.Information = e.target.value)}
+          />
         </Card>
         <Row>
           <Column>
@@ -639,32 +645,38 @@ class Maintenance extends Component {
   render() {
     return (
       <div>
-      {console.log(this.bikes1)}
-      {console.log(this.bikes2)}
+        {console.log(this.bikes1)}
+        {console.log(this.bikes2)}
 
         <Card title="Maintenance" class="liste">
-        <Row>
-        <Column>
-          <List>
-            {this.bikes1.map(bike1 => (
-              <List.Item key={bike1.BikeID}>
-                {bike1.BikeID} - {bike1.Status} , {bike1.Information}
-                <Button.Success id={bike1.BikeID} value={bike1.BikeID} onClick={() => this.move(2, bike1.BikeID)}>Move to Status 2</Button.Success>
-              </List.Item>
-            ))}
-          </List>
-          </Column>
+          <Row>
+            <Column>
+              <p> OK bikes: </p>
+              <List>
+                {this.bikes1.map(bike1 => (
+                  <List.Item key={bike1.BikeID}>
+                    {bike1.BikeID} - {bike1.Brand} - {bike1.Status}, {bike1.Information}
+                    <Button.Danger id={bike1.BikeID} value={bike1.BikeID} onClick={() => this.move(2, bike1.BikeID)}>
+                      Move to Status 2
+                    </Button.Danger>
+                  </List.Item>
+                ))}
+              </List>
+            </Column>
 
-          <Column>
-          <List>
-            {this.bikes2.map(bike2 => (
-              <List.Item key={bike2.BikeID}>
-                {bike2.BikeID} - {bike2.Status} , {bike2.Information}
-                <Button.Danger id={bike2.BikeID} value={bike2.BikeID} onClick={() => this.move(1, bike2.BikeID)}>Move to Status 1</Button.Danger>
-              </List.Item>
-            ))}
-          </List>
-          </Column>
+            <Column>
+              <p> Needs maintenance: </p>
+              <List>
+                {this.bikes2.map(bike2 => (
+                  <List.Item key={bike2.BikeID}>
+                    {bike2.BikeID}, {bike2.Brand}, {bike2.Status}, {bike2.Information}
+                    <Button.Success id={bike2.BikeID} value={bike2.BikeID} onClick={() => this.move(1, bike2.BikeID)}>
+                      Move to Status 1
+                    </Button.Success>
+                  </List.Item>
+                ))}
+              </List>
+            </Column>
           </Row>
         </Card>
       </div>
@@ -690,7 +702,6 @@ class Maintenance extends Component {
       });
     });
   }
-
 }
 
 ReactDOM.render(

@@ -76,11 +76,15 @@ class BikeService {
   }
 
   updateBike(Bike, success) {
-    connection.query('update Bike set status=? where BikeID=?', [Bike.Status, Bike.BikeID], (error, results) => {
-      if (error) return console.error(error);
+    connection.query(
+      'update Bike set status=?, information=? where BikeID=?',
+      [Bike.Status, Bike.Information, Bike.BikeID],
+      (error, results) => {
+        if (error) return console.error(error);
 
-      success();
-    });
+        success();
+      }
+    );
   }
 
   newBike(Brand, Year, Status, Wheelsize, Framesize, Shiftsystem, Information, FK_Location, FK_BikeTypeID) {
@@ -116,7 +120,7 @@ class BikeService {
     });
   }
   moveBike(Status, BikeID, success) {
-    connection.query('UPDATE Bike SET Status = ? WHERE BikeID = ?',[Status ,BikeID],(error, results) => {
+    connection.query('UPDATE Bike SET Status = ? WHERE BikeID = ?', [Status, BikeID], (error, results) => {
       if (error) return console.error(error);
 
       success();
