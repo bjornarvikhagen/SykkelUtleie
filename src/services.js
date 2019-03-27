@@ -59,8 +59,40 @@ class CustomerService {
 }
 
 class BikeService {
-  getBikes(success) {
-    connection.query('select * from Bike', (error, results) => {
+  getBikesT1(success) {
+    connection.query('select * from Bike where FK_BikeTypeID = 1', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBikesT2(success) {
+    connection.query('select * from Bike where FK_BikeTypeID = 2', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBikesT3(success) {
+    connection.query('select * from Bike where FK_BikeTypeID = 3', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBikesT4(success) {
+    connection.query('select * from Bike where FK_BikeTypeID = 4', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBikesT5(success) {
+    connection.query('select * from Bike where FK_BikeTypeID = 5', (error, results) => {
       if (error) return console.error(error);
 
       success(results);
