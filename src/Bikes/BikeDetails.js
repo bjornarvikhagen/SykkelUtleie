@@ -14,6 +14,7 @@ export default class BikeDetails extends Component {
 
     return (
       <div>
+        <Button.Light onClick={this.back}>Back</Button.Light>
         <Card title="Bike details">
           <Row>
             <Column width={2}>BikeID:</Column>
@@ -71,6 +72,9 @@ export default class BikeDetails extends Component {
   }
   edit() {
     history.push('/bikes/' + this.bike.BikeID + '/edit');
+  }
+  back() {
+    history.push('/bikes/');
   }
   delete() {
     bikeService.deleteBike(this.props.match.params.id, () => history.push('/bikes'));

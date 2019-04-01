@@ -15,7 +15,7 @@ export default class Bookings extends Component {
           <List>
             {this.rentals.map(rental => (
               <List.Item key={rental.RentalID} to={'/bookings/' + rental.RentalID}>
-                {rental.RentalID}
+                ID: {rental.RentalID} ON {JSON.stringify(rental.StartDate).slice(0, 11)}
               </List.Item>
             ))}
           </List>

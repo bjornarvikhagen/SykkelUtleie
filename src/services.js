@@ -152,18 +152,26 @@ class BikeService {
     });
   }
   moveBike1(Status, Information, BikeID, success) {
-    connection.query('UPDATE Bike SET Status = ?, Information = ? WHERE BikeID = ?', [Status, Information, BikeID], (error, results) => {
-      if (error) return console.error(error);
+    connection.query(
+      'UPDATE Bike SET Status = ?, Information = ? WHERE BikeID = ?',
+      [Status, Information, BikeID],
+      (error, results) => {
+        if (error) return console.error(error);
 
-      success();
-    });
+        success();
+      }
+    );
   }
   moveBike2(Status, Information, BikeID, success) {
-    connection.query('UPDATE Bike SET Status = ?, Information = " " WHERE BikeID = ?', [Status, Information, BikeID], (error, results) => {
-      if (error) return console.error(error);
+    connection.query(
+      'UPDATE Bike SET Status = ?, Information = " " WHERE BikeID = ?',
+      [Status, Information, BikeID],
+      (error, results) => {
+        if (error) return console.error(error);
 
-      success();
-    });
+        success();
+      }
+    );
   }
 }
 
@@ -186,26 +194,26 @@ class BookingService {
   newBooking(
     StartDate,
     EndDate,
-    FK_CustomerID,
-    FK_BikeID,
     FK_PickupID,
     FK_DropoffID,
+    FK_BikeTypeID,
     FK_Accessories,
     FK_InvoiceID,
-    FK_BikeTypeID
+    FK_CustomerID,
+    FK_BikeID
   ) {
     connection.query(
-      'insert into Rentals (StartDate, EndDate, FK_CustomerID, FK_BikeID, FK_PickupID, FK_DropoffID, FK_Accessories, FK_InvoiceID, FK_BikeTypeID) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      'insert into Rentals (StartDate, EndDate, FK_PickupID, FK_DropoffID, FK_BikeTypeID, FK_AccessoriesID, FK_InvoiceID, FK_CustomerID, FK_BikeID) values (?, ?, ?, ?, ?, 1, 1, 1, 1)',
       [
         StartDate,
         EndDate,
-        FK_CustomerID,
-        FK_BikeID,
         FK_PickupID,
         FK_DropoffID,
+        FK_BikeTypeID,
         FK_Accessories,
         FK_InvoiceID,
-        FK_BikeTypeID
+        FK_CustomerID,
+        FK_BikeID
       ],
       (error, results) => {
         if (error) return console.error(error);

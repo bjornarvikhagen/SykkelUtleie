@@ -15,8 +15,8 @@ export default class BookingDetails extends Component {
       <div>
         <ul>
           <li> RentalID: {this.rental.RentalID} </li>
-          <li> StartDate: {this.rental.toString().StartDate} </li>
-          <li> EndDate: {this.rental.toString().EndDate} </li>
+          <li> StartDate: {JSON.stringify(this.rental.StartDate)} </li>
+          <li> EndDate: {JSON.stringify(this.rental.EndDate)} </li>
           <li> CustomerID: {this.rental.FK_CustomerID} </li>
           <li> BikeID: {this.rental.FK_BikeID} </li>
           <li> PickupID: {this.rental.FK_PickupID} </li>
