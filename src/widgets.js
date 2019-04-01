@@ -97,7 +97,7 @@ export class NavBar extends Component {
 class ButtonSuccess extends Component {
   render() {
     return (
-      <button type="button" className="btn btn-success" onClick={this.props.onClick}>
+      <button type="button" className={"btn btn-success " + this.props.small ? "btn-sm btn-success" : ""} onClick={this.props.onClick}>
         {this.props.children}
       </button>
     );
@@ -109,7 +109,7 @@ class ButtonSuccess extends Component {
 class ButtonDanger extends Component {
   render() {
     return (
-      <button type="button" className="btn btn-danger" onClick={this.props.onClick}>
+      <button type="button" className={"btn btn-danger"  + this.props.small ? "btn-sm btn-danger" : ""} onClick={this.props.onClick}>
         {this.props.children}
       </button>
     );

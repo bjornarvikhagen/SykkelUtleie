@@ -151,8 +151,15 @@ class BikeService {
       success(results);
     });
   }
-  moveBike(Status, BikeID, success) {
-    connection.query('UPDATE Bike SET Status = ? WHERE BikeID = ?', [Status, BikeID], (error, results) => {
+  moveBike1(Status, Information, BikeID, success) {
+    connection.query('UPDATE Bike SET Status = ?, Information = ? WHERE BikeID = ?', [Status, Information, BikeID], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
+  moveBike2(Status, Information, BikeID, success) {
+    connection.query('UPDATE Bike SET Status = ?, Information = " " WHERE BikeID = ?', [Status, Information, BikeID], (error, results) => {
       if (error) return console.error(error);
 
       success();
