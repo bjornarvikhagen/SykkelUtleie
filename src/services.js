@@ -11,6 +11,7 @@ class CustomerService {
 
   getCustomer(CustomerID, success) {
     connection.query('select * from Customer where CustomerID=?', [CustomerID], (error, results) => {
+      // 'select Location.LocationID'
       if (error) return console.error(error);
 
       success(results[0]);
@@ -99,6 +100,7 @@ class BikeService {
     });
   }
 
+
   getBike(BikeID, success) {
     connection.query('select * from Bike where BikeID = ?', [BikeID], (error, results) => {
       if (error) return console.error(error);
@@ -151,27 +153,12 @@ class BikeService {
       success(results);
     });
   }
-  moveBike1(Status, Information, BikeID, success) {
-    connection.query(
-      'UPDATE Bike SET Status = ?, Information = ? WHERE BikeID = ?',
-      [Status, Information, BikeID],
-      (error, results) => {
-        if (error) return console.error(error);
+  moveBike(Status, BikeID, success) {
+    connection.query('UPDATE Bike SET Status = ? WHERE BikeID = ?', [Status, BikeID], (error, results) => {
+      if (error) return console.error(error);
 
-        success();
-      }
-    );
-  }
-  moveBike2(Status, Information, BikeID, success) {
-    connection.query(
-      'UPDATE Bike SET Status = ?, Information = " " WHERE BikeID = ?',
-      [Status, Information, BikeID],
-      (error, results) => {
-        if (error) return console.error(error);
-
-        success();
-      }
-    );
+      success();
+    });
   }
 }
 
@@ -194,26 +181,26 @@ class BookingService {
   newBooking(
     StartDate,
     EndDate,
+    FK_CustomerID,
+    FK_BikeID,
     FK_PickupID,
     FK_DropoffID,
-    FK_BikeTypeID,
     FK_Accessories,
     FK_InvoiceID,
-    FK_CustomerID,
-    FK_BikeID
+    FK_BikeTypeID
   ) {
     connection.query(
-      'insert into Rentals (StartDate, EndDate, FK_PickupID, FK_DropoffID, FK_BikeTypeID, FK_AccessoriesID, FK_InvoiceID, FK_CustomerID, FK_BikeID) values (?, ?, ?, ?, ?, 1, 1, 1, 1)',
+      'insert into Rentals (StartDate, EndDate, FK_CustomerID, FK_BikeID, FK_PickupID, FK_DropoffID, FK_Accessories, FK_InvoiceID, FK_BikeTypeID) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [
         StartDate,
         EndDate,
+        FK_CustomerID,
+        FK_BikeID,
         FK_PickupID,
         FK_DropoffID,
-        FK_BikeTypeID,
         FK_Accessories,
         FK_InvoiceID,
-        FK_CustomerID,
-        FK_BikeID
+        FK_BikeTypeID
       ],
       (error, results) => {
         if (error) return console.error(error);
@@ -223,16 +210,48 @@ class BookingService {
 }
 
 class LocationService {
-  getLocations(success) {
-    connection.query('select * from Location', (error, results) => {
+  getBikesLocation1(success) {
+    connection.query('select * from Bike where FK_Location = 1', (error, results) => {
       if (error) return console.error(error);
 
       success(results);
     });
   }
 
-  getLocation(LocationID, success) {
-    connection.query('select * from Location where LocationID=?', [LocationID], (error, results) => {
+  getBikesLocation2(success) {
+    connection.query('select * from Bike where FK_Location = 2', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBikesLocation3(success) {
+    connection.query('select * from Bike where FK_Location = 3', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBikesLocation4(success) {
+    connection.query('select * from Bike where FK_Location = 4', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBikesLocation5(success) {
+    connection.query('select * from Bike where FK_Location = 5', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getBike(BikeID, success) {
+    connection.query('select * from Bike where BikeID = ?', [BikeID], (error, results) => {
       if (error) return console.error(error);
 
       success(results[0]);
