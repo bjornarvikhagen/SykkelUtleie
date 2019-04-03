@@ -15,7 +15,7 @@ export default class Locations extends Component {
           <List>
             {this.locations.map(location => (
               <List.Item key={location.LocationID} to={'/locations/' + location.LocationID}>
-                {location.LocationID} - {location.Place} , {location.Address}''
+                {location.LocationID} - {location.Place} , {location.Address}
               </List.Item>
             ))}
           </List>

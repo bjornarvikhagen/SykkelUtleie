@@ -33,14 +33,6 @@ export default class LocationDetails extends Component {
             <Column> {this.location.Place}</Column>
           </Row>
         </Card>
-        <Row>
-          <Column>
-            <Button.Light onClick={this.edit}>Edit</Button.Light>
-          </Column>
-          <Column right>
-            <Button.Danger onClick={this.delete}>Delete</Button.Danger>
-          </Column>
-        </Row>
       </div>
     );
   }
@@ -48,5 +40,8 @@ export default class LocationDetails extends Component {
     locationService.getLocation(this.props.match.params.id, location => {
       this.location = location;
     });
+  }
+  back() {
+    history.push('/locations');
   }
 }
