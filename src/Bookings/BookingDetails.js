@@ -46,7 +46,7 @@ export default class BookingDetails extends Component {
           {this.FK_BikeID.map(bikes => (
             <List.Item key={bikes.FK_BikeID}>
               {' '}
-              ID: {bikes.FK_BikeID} - {bikes.Brand}
+              ID: {bikes.FK_BikeID} - {bikes.Brand} - {bikes.Name}
             </List.Item>
           ))}
           <br />
@@ -54,7 +54,7 @@ export default class BookingDetails extends Component {
           {this.AccessoryID.map(acc => (
             <List.Item key={acc.FK_AccessoryID}>
               {' '}
-              ID: {acc.FK_AccessoryID} - {acc.Name}
+              ID: {acc.FK_AccessoryID} - {acc.Name} - {acc.Price}kr /day
             </List.Item>
           ))}
         </Card>

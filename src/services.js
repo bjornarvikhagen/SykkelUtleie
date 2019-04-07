@@ -247,7 +247,7 @@ class BookingService {
 
   getRentedBikes(FK_BikeID, success) {
     connection.query(
-      'select * from RentedBikes rb, Bike b where rb.FK_BikeID = b.BikeID and RentalID = ?',
+      'select * from RentedBikes rb, Bike b, BikeType bt where rb.FK_BikeID = b.BikeID and b.FK_BikeTypeID = bt.BikeTypeID and RentalID = ?',
       [FK_BikeID],
       (error, results) => {
         if (error) return console.error(error);
