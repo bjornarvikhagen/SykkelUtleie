@@ -8,23 +8,56 @@ const history = createHashHistory(); // Use history.push(...) to programmaticall
 
 export default class BookingDetails extends Component {
   rental = [];
+  FK_BikeID = [];
+  AccessoryID = [];
   render() {
     if (!this.rental) return null;
 
     return (
       <div>
-        <ul>
-          <li> RentalID: {this.rental.RentalID} </li>
-          <li> StartDate: {JSON.stringify(this.rental.StartDate)} </li>
-          <li> EndDate: {JSON.stringify(this.rental.EndDate)} </li>
-          <li> CustomerID: {this.rental.FK_CustomerID} </li>
-          <li> BikeID: {this.rental.FK_BikeID} </li>
-          <li> PickupID: {this.rental.FK_PickupID} </li>
-          <li> DropoffID: {this.rental.FK_DropoffID} </li>
-          <li> Accessories: {this.rental.FK_AccessoriesID} </li>
-          <li> Invoice ID: {this.rental.FK_InvoiceID} </li>
-          <li> BikeTypeID: {this.rental.FK_BikeTypeID} </li>
-        </ul>
+        <Button.Light onClick={this.back}>Back</Button.Light>
+        <Card title="Booking details">
+          <Row>
+            <Column width={2}>RentalID:</Column>
+            <Column>{this.rental.RentalID}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>StartDate:</Column>
+            <Column>{JSON.stringify(this.rental.StartDate)}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>EndDate:</Column>
+            <Column>{JSON.stringify(this.rental.EndDate)}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>CustomerID:</Column>
+            <Column> {this.rental.FK_CustomerID}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>PickupID:</Column>
+            <Column>{this.rental.FK_PickupID}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>DropoffID:</Column>
+            <Column>{this.rental.FK_DropoffID}</Column>
+          </Row>
+          <br />
+          <h5> Rented Bikes: </h5>
+          {this.FK_BikeID.map(bikes => (
+            <List.Item key={bikes.FK_BikeID}>
+              {' '}
+              ID: {bikes.FK_BikeID} - {bikes.Brand}
+            </List.Item>
+          ))}
+          <br />
+          <h5> Rented Accessory: </h5>
+          {this.AccessoryID.map(acc => (
+            <List.Item key={acc.FK_AccessoryID}>
+              {' '}
+              ID: {acc.FK_AccessoryID} - {acc.Name}
+            </List.Item>
+          ))}
+        </Card>
       </div>
     );
   }
@@ -33,5 +66,15 @@ export default class BookingDetails extends Component {
     bookingService.getBooking(this.props.match.params.id, rental => {
       this.rental = rental;
     });
+    bookingService.getRentedBikes(this.props.match.params.id, FK_BikeID => {
+      this.FK_BikeID = FK_BikeID;
+    });
+    bookingService.getRentedAccessories(this.props.match.params.id, AccessoryID => {
+      this.AccessoryID = AccessoryID;
+    });
+  }
+
+  back() {
+    history.push('/bookings');
   }
 }

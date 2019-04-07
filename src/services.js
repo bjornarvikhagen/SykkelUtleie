@@ -189,6 +189,14 @@ class BookingService {
     );
   }
 
+  getAcc(AccessoryID, success) {
+    connection.query('select * from Accessories where FK_AccessoryType = ?', [AccessoryID], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
   getRentalID(success) {
     connection.query('SELECT MAX(RentalID) as RentalID from Rentals', (error, results) => {
       if (error) return console.error(error);
@@ -198,8 +206,48 @@ class BookingService {
   }
 
   getBikesinRental(FK_BikeID, success) {
+    connection.query('select * from RentedBikes where RentalID = ?', [FK_BikeID], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  addBike(RentalID, FK_BikeID) {
     connection.query(
-      'select FK_BikeID from RentedBikes rb, Rentals r Where r.RentalID = rb.FK_RentalID and FK_RentalID = ?',
+      'insert into RentedBikes (RentalID, FK_BikeID) values (?, ?)',
+      [RentalID, FK_BikeID],
+      (error, results) => {
+        if (error) return console.error(error);
+      }
+    );
+  }
+
+  addAcc(FK_RentalID, FK_AccessoryID) {
+    connection.query(
+      'insert into RentedAccessories (FK_RentalID, FK_AccessoryID) values (?, ?)',
+      [FK_RentalID, FK_AccessoryID],
+      (error, results) => {
+        if (error) return console.error(error);
+      }
+    );
+  }
+
+  newBooking(RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID, success) {
+    connection.query(
+      'INSERT INTO Rentals (RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+
+  getRentedBikes(FK_BikeID, success) {
+    connection.query(
+      'select * from RentedBikes rb, Bike b where rb.FK_BikeID = b.BikeID and RentalID = ?',
       [FK_BikeID],
       (error, results) => {
         if (error) return console.error(error);
@@ -209,22 +257,14 @@ class BookingService {
     );
   }
 
-  addBike(FK_RentalID, FK_BikeID) {
+  getRentedAccessories(FK_AccessoryID, success) {
     connection.query(
-      'insert into RentedBikes (FK_RentalID, FK_BikeID) values (?, ?)',
-      [FK_RentalID, FK_BikeID],
+      'select * from RentedAccessories ra, Accessories a where ra.FK_AccessoryID = a.AccessoryID and RentalID = ?',
+      [FK_AccessoryID],
       (error, results) => {
         if (error) return console.error(error);
-      }
-    );
-  }
 
-  newBooking(RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID) {
-    connection.query(
-      'INSERT INTO Rentals (RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID],
-      (error, results) => {
-        if (error) return console.error(error);
+        success(results);
       }
     );
   }

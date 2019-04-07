@@ -18,6 +18,8 @@ export default class BookingNew extends Component {
   rentedBikes = [];
   FK_InvoiceID = '';
   FK_CustomerID = '';
+  AccessoryType = '';
+  AccessoryID = [];
 
   render() {
     return (
@@ -64,7 +66,7 @@ export default class BookingNew extends Component {
           <List>
             {this.FK_BikeID.map(bike => (
               <List.Item key={bike.BikeID}>
-                BikeID: {bike.BikeID} - {bike.Name} - {bike.Price} per day{' '}
+                BikeID: {bike.BikeID} - {bike.Name} - {bike.Price}kr per day{' '}
                 <input type="checkbox" value={this.FK_BikeID} onChange={e => (bike.checked = e.target.checked)} />
               </List.Item>
             ))}
@@ -77,6 +79,26 @@ export default class BookingNew extends Component {
               <List.Item key={bikes.FK_BikeID}> {bikes.FK_BikeID}</List.Item>
             ))}
           </List>
+          <Form.Label>Accessory Type:</Form.Label>
+          <br />
+          <select id="acctype" value={this.AccessoryType} onChange={this.getAcc}>
+            <option value={0}>Choose type..</option>
+            <option value={1}>Helmet</option>
+            <option value={2}>Bike Bag</option>
+            <option value={3}>Lock</option>
+            <option value={4}>Cargo Trailer </option>
+            <option value={5}>Kids Trailer </option>
+          </select>
+          <List>
+            {this.AccessoryID.map(acc => (
+              <List.Item key={acc.AccessoryID}>
+                {acc.Name} - {acc.Price}kr per day{' '}
+                <input type="checkbox" value={this.AccessoryID} onChange={e => (acc.checked = e.target.checked)} />
+              </List.Item>
+            ))}
+          </List>
+          <Button.Light onClick={this.addAcc}>Add Accessory</Button.Light>
+          <br />
           <Form.Label>InnvoiceID:</Form.Label>
           <Form.Input
             type="number"
@@ -96,14 +118,9 @@ export default class BookingNew extends Component {
       this.RentalID = rental.RentalID + 1;
     });
 
-    // bookingService.getBikesinRental(document.getElementById('id').value, rentedBikes => {
-    //   this.rentedBikes = rentedBikes;
+    // bookingService.getBikesinRental(FK_BikeID => {
+    //   this.FK_BikeID = FK_BikeID;
     // });
-
-    //   //hent bikes som tilhører denne rental ID
-    //   bookingService.getBikesinRental(rentedBikes => {
-    //     this.rentedBikes = rentedBikes.rentedBikes;
-    //   });
   }
 
   getBikes() {
@@ -112,11 +129,26 @@ export default class BookingNew extends Component {
     });
   }
 
+  getAcc() {
+    bookingService.getAcc(document.getElementById('acctype').value, AccessoryID => {
+      this.AccessoryID = AccessoryID;
+    });
+  }
+
   addBike() {
     for (let x = 0; x < this.FK_BikeID.length; x++) {
       if (this.FK_BikeID[x].checked == true) {
-        console.log('checked' + this.FK_BikeID[x].BikeID);
+        console.log('checked bike' + this.FK_BikeID[x].BikeID);
         bookingService.addBike(this.RentalID, this.FK_BikeID[x].BikeID, () => {});
+      }
+    }
+  }
+
+  addAcc() {
+    for (let x = 0; x < this.AccessoryID.length; x++) {
+      if (this.AccessoryID[x].checked == true) {
+        console.log('checked acc' + this.AccessoryID[x].AccessoryID);
+        bookingService.addAcc(this.RentalID, this.AccessoryID[x].AccessoryID, () => {});
       }
     }
   }
