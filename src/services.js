@@ -100,7 +100,6 @@ class BikeService {
     });
   }
 
-
   getBike(BikeID, success) {
     connection.query('select * from Bike where BikeID = ?', [BikeID], (error, results) => {
       if (error) return console.error(error);
@@ -178,30 +177,52 @@ class BookingService {
     });
   }
 
-  newBooking(
-    StartDate,
-    EndDate,
-    FK_CustomerID,
-    FK_BikeID,
-    FK_PickupID,
-    FK_DropoffID,
-    FK_Accessories,
-    FK_InvoiceID,
-    FK_BikeTypeID
-  ) {
+  getBikes(BikeID, success) {
     connection.query(
-      'insert into Rentals (StartDate, EndDate, FK_CustomerID, FK_BikeID, FK_PickupID, FK_DropoffID, FK_Accessories, FK_InvoiceID, FK_BikeTypeID) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [
-        StartDate,
-        EndDate,
-        FK_CustomerID,
-        FK_BikeID,
-        FK_PickupID,
-        FK_DropoffID,
-        FK_Accessories,
-        FK_InvoiceID,
-        FK_BikeTypeID
-      ],
+      'SELECT * FROM Bike b, BikeType bt WHERE b.FK_BikeTypeID = bt.BikeTypeID  AND b.FK_BikeTypeID = ? AND b.Status = 1',
+      [BikeID],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
+      }
+    );
+  }
+
+  getRentalID(success) {
+    connection.query('SELECT MAX(RentalID) as RentalID from Rentals', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results[0]);
+    });
+  }
+
+  getBikesinRental(FK_BikeID, success) {
+    connection.query(
+      'select FK_BikeID from RentedBikes rb, Rentals r Where r.RentalID = rb.FK_RentalID and FK_RentalID = ?',
+      [FK_BikeID],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
+      }
+    );
+  }
+
+  addBike(FK_RentalID, FK_BikeID) {
+    connection.query(
+      'insert into RentedBikes (FK_RentalID, FK_BikeID) values (?, ?)',
+      [FK_RentalID, FK_BikeID],
+      (error, results) => {
+        if (error) return console.error(error);
+      }
+    );
+  }
+
+  newBooking(RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID) {
+    connection.query(
+      'INSERT INTO Rentals (RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID],
       (error, results) => {
         if (error) return console.error(error);
       }
