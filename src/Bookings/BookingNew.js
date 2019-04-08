@@ -27,12 +27,6 @@ export default class BookingNew extends Component {
 
     return (
       <div>
-        <Card title="Customer details">
-          <Row>
-            <Column width={2}>CustomerID:</Column>
-            <Column>{this.customer.CustomerID}</Column>
-          </Row>
-        </Card>
         <Card title="New Booking">
           <Form.Label>RentalID:</Form.Label>
           <Form.Input type="number" id="id" value={this.RentalID} onChange={e => (this.RentalID = e.target.value)} />
@@ -41,7 +35,11 @@ export default class BookingNew extends Component {
           <Form.Label>EndDate:</Form.Label>
           <Form.Input type="date" id="end" value={this.EndDate} onChange={e => (this.EndDate = e.target.value)} />
           <Form.Label>Customer ID:</Form.Label>
-          <Form.Input type="number" value={this.FK_CustomerID} onChange={e => (this.FK_CustomerID = e.target.value)} />
+          <Form.Input
+            type="number"
+            value={this.customer.CustomerID}
+            onChange={e => (this.customer.CustomerID = e.target.value)}
+          />
           <Form.Label>PickUp:</Form.Label>
           <br />
           <select id="PickUp" value={this.FK_PickupID} onChange={e => (this.FK_PickupID = e.target.value)}>
@@ -171,10 +169,17 @@ export default class BookingNew extends Component {
       this.RentalID,
       this.StartDate,
       this.EndDate,
-      this.FK_CustomerID,
+      this.customer.CustomerID,
       this.FK_PickupID,
       this.FK_DropoffID,
       this.FK_InvoiceID
     );
   }
 }
+
+// <Card title="Customer details">
+//   <Row>
+//     <Column width={2}>CustomerID:</Column>
+//     <Column>{this.customer.CustomerID}</Column>
+//   </Row>
+// </Card>
