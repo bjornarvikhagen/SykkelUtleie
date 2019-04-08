@@ -193,7 +193,7 @@ class BikeService {
 
 class BookingService {
   getBookings(success) {
-    connection.query('select * from Rentals', (error, results) => {
+    connection.query('select * from Rentals r, Customer c where r.FK_CustomerID = c.CustomerID', (error, results) => {
       if (error) return console.error(error);
 
       success(results);
