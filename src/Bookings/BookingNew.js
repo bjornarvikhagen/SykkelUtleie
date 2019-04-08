@@ -20,10 +20,19 @@ export default class BookingNew extends Component {
   FK_CustomerID = '';
   AccessoryType = '';
   AccessoryID = [];
+  customer = null;
 
   render() {
+    if (!this.customer) return null;
+
     return (
       <div>
+        <Card title="Customer details">
+          <Row>
+            <Column width={2}>CustomerID:</Column>
+            <Column>{this.customer.CustomerID}</Column>
+          </Row>
+        </Card>
         <Card title="New Booking">
           <Form.Label>RentalID:</Form.Label>
           <Form.Input type="number" id="id" value={this.RentalID} onChange={e => (this.RentalID = e.target.value)} />
@@ -116,6 +125,9 @@ export default class BookingNew extends Component {
   mounted() {
     bookingService.getRentalID(rental => {
       this.RentalID = rental.RentalID + 1;
+    });
+    customerService.getCustomer(this.props.match.params.id, customer => {
+      this.customer = customer;
     });
 
     // bookingService.getBikesinRental(FK_BikeID => {

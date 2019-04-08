@@ -30,6 +30,6 @@ export default class Bookings extends Component {
     });
   }
   new() {
-    history.push('/new_booking');
+    history.push('/bookings_customer');
   }
 }

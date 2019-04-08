@@ -18,6 +18,14 @@ class CustomerService {
     });
   }
 
+  searchCustomers(Mobile, success) {
+    connection.query('SELECT * FROM Customer WHERE Mobile = ?', [Mobile], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
   updateCustomer(Customer, success) {
     connection.query(
       'update Customer set FirstName=?, LastName=?, Mobile=?, Email=?, Address=?, Zip=?, City=?, Country=? where CustomerID=?',
