@@ -275,14 +275,12 @@ class BookingService {
     );
   }
 
-  newBooking(RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, success) {
+  newBooking(RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID) {
     connection.query(
-      'INSERT INTO Rentals (RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO Rentals (RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID) VALUES (?, ?, ?, ?, ?, ?)',
       [RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID],
       (error, results) => {
         if (error) return console.error(error);
-
-        success();
       }
     );
   }

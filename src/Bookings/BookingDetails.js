@@ -50,7 +50,7 @@ export default class BookingDetails extends Component {
           {this.FK_BikeID.map(bikes => (
             <List.Item key={bikes.FK_BikeID}>
               {' '}
-              ID: {bikes.FK_BikeID} - {bikes.Brand} - {bikes.Name}
+              ID: {bikes.FK_BikeID} - {bikes.Brand} - {bikes.Name} - {bikes.Price}kr /day
             </List.Item>
           ))}
           <br />
