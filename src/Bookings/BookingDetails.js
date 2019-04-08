@@ -10,6 +10,7 @@ export default class BookingDetails extends Component {
   rental = [];
   FK_BikeID = [];
   AccessoryID = [];
+
   render() {
     if (!this.rental) return null;
 
@@ -31,7 +32,10 @@ export default class BookingDetails extends Component {
           </Row>
           <Row>
             <Column width={2}>CustomerID:</Column>
-            <Column> {this.rental.FK_CustomerID}</Column>
+            <Column id="customer">
+              {' '}
+              {this.rental.FK_CustomerID} - {this.rental.FirstName} {this.rental.LastName}
+            </Column>
           </Row>
           <Row>
             <Column width={2}>PickupID:</Column>
@@ -66,6 +70,7 @@ export default class BookingDetails extends Component {
     bookingService.getBooking(this.props.match.params.id, rental => {
       this.rental = rental;
     });
+
     bookingService.getRentedBikes(this.props.match.params.id, FK_BikeID => {
       this.FK_BikeID = FK_BikeID;
     });

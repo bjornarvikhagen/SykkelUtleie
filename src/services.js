@@ -178,11 +178,15 @@ class BookingService {
     });
   }
   getBooking(RentalID, success) {
-    connection.query('select * from Rentals where RentalID = ?', [RentalID], (error, results) => {
-      if (error) return console.error(error);
+    connection.query(
+      'select * from Rentals r, Customer c, Location l where r.FK_CustomerID = c.CustomerID  and RentalID = ?',
+      [RentalID],
+      (error, results) => {
+        if (error) return console.error(error);
 
-      success(results[0]);
-    });
+        success(results[0]);
+      }
+    );
   }
 
   getBikes(BikeID, success) {

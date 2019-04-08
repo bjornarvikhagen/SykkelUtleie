@@ -44,7 +44,7 @@ export default class BookingNew extends Component {
           <Form.Label>PickUp:</Form.Label>
           <br />
           <select id="PickUp" value={this.FK_PickupID} onChange={e => (this.FK_PickupID = e.target.value)}>
-            <option value={0}>Velg sted..</option>
+            <option value={0}>Choose location..</option>
             <option value={1}>Haugastøl</option>
             <option value={2}>Finse </option>
           </select>
@@ -52,7 +52,7 @@ export default class BookingNew extends Component {
           <Form.Label>DropOff:</Form.Label>
           <br />
           <select id="DropOff" value={this.FK_DropoffID} onChange={e => (this.FK_DropoffID = e.target.value)}>
-            <option value={0}>Velg sted..</option>
+            <option value={0}>Choose location..</option>
             <option value={1}>Haugastøl</option>
             <option value={2}>Finse </option>
             <option value={3}>Flåm </option>
