@@ -21,12 +21,13 @@ export default class Locations extends Component {
               <p>1 - Haugastøl</p>
               <List>
                 {this.bikes1.map(bike1 => (
-                  <List.Item key={bike1.BikeID} to={'/bikes/' + bike1.BikeID}>
-                    {bike1.BikeID} - {bike1.Brand}''
+                  <List.Item key={bike1.BikeID}>
+                    <input type="checkbox" checked={bike1.checked} onChange={e => bike1.checked = e.target.checked}/>{bike1.BikeID} - {bike1.Brand}''
                   </List.Item>
                 ))}
               </List>
             </Column>
+            <Button.Success onClick={() => console.log(this.bikes1)}>test</Button.Success>
             <Column>
               <p>2 - Finse</p>
               <List>
@@ -75,6 +76,7 @@ export default class Locations extends Component {
 
   mounted() {
     locationService.getBikesLocation1(bikes1 => {
+      for(let bike of bikes1) bike.checked = false;
       this.bikes1 = bikes1;
     });
     locationService.getBikesLocation2(bikes2 => {
