@@ -11,17 +11,17 @@ export default class BookingsCustomer extends Component {
   render() {
     return (
       <div>
-        <div>
-          <Form.Label>BookingsCustomer: Find Customer by phone number:</Form.Label>
-          <div id="CustomerSearch">
-            <input id="CustomerSearchField" type="text" />
-            <button id="CustomerSearchButton" onClick={this.mounted}>
-              Search
-            </button>
-          </div>
-        </div>
-        <div>
-          <Card title="Customer">
+        <Card>
+          <div>
+            <h5>Find Customer by phone number:</h5>
+            <div id="CustomerSearch">
+              <input id="CustomerSearchField" type="text" />
+              <Button.Success id="CustomerSearchButton" onClick={this.mounted}>
+                Search
+              </Button.Success>
+            </div>{' '}
+            <br />
+            <h6>Select customer:</h6>
             <List>
               {this.customers.map(customer => (
                 <List.Item key={customer.CustomerID} to={'/new_booking/' + customer.CustomerID}>
@@ -29,9 +29,9 @@ export default class BookingsCustomer extends Component {
                 </List.Item>
               ))}
             </List>
-          </Card>
-          <Button.Success onClick={this.new}>New Customer</Button.Success>
-        </div>
+          </div>
+        </Card>
+        <Button.Success onClick={this.new}>New Customer</Button.Success>
       </div>
     );
   }
