@@ -20,6 +20,7 @@ export default class BookingNew extends Component {
   FK_CustomerID = '';
   AccessoryType = '';
   AccessoryID = [];
+  rentedAccessories = [];
   customer = null;
 
   render() {
@@ -80,12 +81,15 @@ export default class BookingNew extends Component {
           </List>
           <Button.Light onClick={this.addBike}>Add Bike</Button.Light>
           <br /> <br />
-          <p> Bikes in this rental: </p>
+          <Form.Label>Bikes in this rental: </Form.Label>
           <List>
             {this.rentedBikes.map(bikes => (
-              <List.Item key={bikes.FK_BikeID}> {bikes.FK_BikeID}</List.Item>
+              <List.Item key={bikes.FK_BikeID}> BikeID: {bikes.FK_BikeID}</List.Item>
             ))}
-          </List>
+          </List>{' '}
+          <br />
+          <Button.Light onClick={this.removeBike}>Remove bikes</Button.Light>
+          <br />
           <Form.Label>Accessory Type:</Form.Label>
           <br />
           <select id="acctype" value={this.AccessoryType} onChange={this.getAcc}>
@@ -105,6 +109,15 @@ export default class BookingNew extends Component {
             ))}
           </List>
           <Button.Light onClick={this.addAcc}>Add Accessory</Button.Light>
+          <br /> <br />
+          <Form.Label>Accessory in this rental: </Form.Label>
+          <List>
+            {this.rentedAccessories.map(acc => (
+              <List.Item key={acc.FK_AccessoryID}> AccessoryID: {acc.FK_AccessoryID}</List.Item>
+            ))}
+          </List>
+          <br />
+          <Button.Light onClick={this.removeAcc}>Remove Accessory</Button.Light>
           <br />
           <Form.Label>InnvoiceID:</Form.Label>
           <Form.Input
@@ -127,10 +140,6 @@ export default class BookingNew extends Component {
     customerService.getCustomer(this.props.match.params.id, customer => {
       this.customer = customer;
     });
-
-    // bookingService.getBikesinRental(FK_BikeID => {
-    //   this.FK_BikeID = FK_BikeID;
-    // });
   }
 
   getBikes() {
@@ -150,6 +159,9 @@ export default class BookingNew extends Component {
       if (this.FK_BikeID[x].checked == true) {
         console.log('checked bike' + this.FK_BikeID[x].BikeID);
         bookingService.addBike(this.RentalID, this.FK_BikeID[x].BikeID, () => {});
+        bookingService.getBikesinRental(this.RentalID, rentedBikes => {
+          this.rentedBikes = rentedBikes;
+        });
       }
     }
   }
@@ -159,8 +171,28 @@ export default class BookingNew extends Component {
       if (this.AccessoryID[x].checked == true) {
         console.log('checked acc' + this.AccessoryID[x].AccessoryID);
         bookingService.addAcc(this.RentalID, this.AccessoryID[x].AccessoryID, () => {});
+        bookingService.getAccinRental(this.RentalID, rentedAccessories => {
+          this.rentedAccessories = rentedAccessories;
+        });
       }
     }
+  }
+
+  removeBike() {
+    bookingService.removeBike(this.RentalID, () => {});
+    console.log(this.RentalID);
+
+    bookingService.getBikesinRental(this.RentalID, rentedBikes => {
+      this.rentedBikes = rentedBikes;
+    });
+  }
+
+  removeAcc() {
+    bookingService.removeAcc(this.RentalID, () => {});
+
+    bookingService.getAccinRental(this.RentalID, rentedAccessories => {
+      this.rentedAccessories = rentedAccessories;
+    });
   }
 
   save() {
@@ -176,10 +208,3 @@ export default class BookingNew extends Component {
     );
   }
 }
-
-// <Card title="Customer details">
-//   <Row>
-//     <Column width={2}>CustomerID:</Column>
-//     <Column>{this.customer.CustomerID}</Column>
-//   </Row>
-// </Card>

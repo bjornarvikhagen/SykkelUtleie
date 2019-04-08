@@ -221,6 +221,14 @@ class BookingService {
     });
   }
 
+  getAccinRental(FK_AccessoryID, success) {
+    connection.query('select * from RentedAccessories where RentalID = ?', [FK_AccessoryID], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
   addBike(RentalID, FK_BikeID) {
     connection.query(
       'insert into RentedBikes (RentalID, FK_BikeID) values (?, ?)',
@@ -231,20 +239,20 @@ class BookingService {
     );
   }
 
-  addAcc(FK_RentalID, FK_AccessoryID) {
+  addAcc(RentalID, FK_AccessoryID) {
     connection.query(
-      'insert into RentedAccessories (FK_RentalID, FK_AccessoryID) values (?, ?)',
-      [FK_RentalID, FK_AccessoryID],
+      'insert into RentedAccessories (RentalID, FK_AccessoryID) values (?, ?)',
+      [RentalID, FK_AccessoryID],
       (error, results) => {
         if (error) return console.error(error);
       }
     );
   }
 
-  newBooking(RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID, success) {
+  newBooking(RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, success) {
     connection.query(
-      'INSERT INTO Rentals (RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID, FK_InvoiceID],
+      'INSERT INTO Rentals (RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID VALUES (?, ?, ?, ?, ?, ?)',
+      [RentalID, StartDate, EndDate, FK_CustomerID, FK_PickupID, FK_DropoffID],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -275,6 +283,18 @@ class BookingService {
         success(results);
       }
     );
+  }
+
+  removeBike(RentalID) {
+    connection.query('delete from RentedBikes where RentalID = ?', [RentalID], (error, results) => {
+      if (error) return console.error(error);
+    });
+  }
+
+  removeAcc(RentalID) {
+    connection.query('delete from RentedAccessories where RentalID = ?', [RentalID], (error, results) => {
+      if (error) return console.error(error);
+    });
   }
 }
 
