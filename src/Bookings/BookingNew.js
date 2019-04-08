@@ -203,8 +203,7 @@ export default class BookingNew extends Component {
       this.EndDate,
       this.customer.CustomerID,
       this.FK_PickupID,
-      this.FK_DropoffID,
-      this.FK_InvoiceID
+      this.FK_DropoffID
     );
   }
 }
