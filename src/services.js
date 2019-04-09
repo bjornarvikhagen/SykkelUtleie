@@ -326,6 +326,22 @@ class BookingService {
       if (error) return console.error(error);
     });
   }
+
+  // updateBikeLocation(FK_Location, BikeID) {
+  //   connection.query('update Bike set FK_Location =? where BikeID = ?', [FK_Location, BikeID], (error, results) => {
+  //     if (error) return console.error(error);
+  //   });
+  // }
+
+  changeRentalStatus(RentalID) {
+    connection.query(
+      'update Rentals set RentalStatus = "Completed" where RentalID = ?',
+      [RentalID],
+      (error, results) => {
+        if (error) return console.error(error);
+      }
+    );
+  }
 }
 
 class LocationService {

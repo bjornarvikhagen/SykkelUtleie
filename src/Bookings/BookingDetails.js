@@ -17,7 +17,11 @@ export default class BookingDetails extends Component {
     return (
       <div>
         <Button.Light onClick={this.back}>Back</Button.Light>
+
         <Card title="Booking details:">
+          <Column right>
+            <Button.Danger onClick={this.return}>Register return</Button.Danger>
+          </Column>
           <Row>
             <Column width={2}>RentalID:</Column>
             <Column>{this.rental.RentalID}</Column>
@@ -48,10 +52,12 @@ export default class BookingDetails extends Component {
           <Row>
             <Column width={2}>Payment status:</Column>
             <Column>
-              {this.rental.PaymentStatus} <Button.Success onClick={this.pay}>Update to Paid</Button.Success>
+              {this.rental.PaymentStatus}{' '}
+              <Button.Success id="paid" onClick={this.pay}>
+                Update to Paid
+              </Button.Success>
             </Column>
           </Row>
-
           <br />
           <h5> Rented Bikes: </h5>
           {this.FK_BikeID.map(bikes => (
@@ -60,7 +66,6 @@ export default class BookingDetails extends Component {
               {console.log(this.FK_BikeID)}
             </List.Item>
           ))}
-
           <br />
           <h5> Rented Accessory: </h5>
           {this.AccessoryID.map(acc => (
@@ -107,5 +112,8 @@ export default class BookingDetails extends Component {
 
   back() {
     history.push('/bookings');
+  }
+  return() {
+    history.push('/bookings/' + this.rental.RentalID + '/return');
   }
 }
