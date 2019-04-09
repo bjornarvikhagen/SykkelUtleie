@@ -12,6 +12,7 @@ export default class Bookings extends Component {
     return (
       <div>
         <Card title="Bookings">
+          <Button.Success onClick={this.new}>New Booking</Button.Success>
           <List>
             {this.rentals.map(rental => (
               <List.Item key={rental.RentalID} to={'/bookings/' + rental.RentalID}>
@@ -21,7 +22,6 @@ export default class Bookings extends Component {
             ))}
           </List>
         </Card>
-        <Button.Success onClick={this.new}>New Booking</Button.Success>
       </div>
     );
   }

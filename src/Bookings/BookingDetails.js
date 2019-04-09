@@ -17,7 +17,7 @@ export default class BookingDetails extends Component {
     return (
       <div>
         <Button.Light onClick={this.back}>Back</Button.Light>
-        <Card title="Booking details">
+        <Card title="Booking details:">
           <Row>
             <Column width={2}>RentalID:</Column>
             <Column>{this.rental.RentalID}</Column>
@@ -61,6 +61,8 @@ export default class BookingDetails extends Component {
               ID: {acc.FK_AccessoryID} - {acc.Name} - {acc.Price}kr /day
             </List.Item>
           ))}
+          <br />
+          <h5>Price:</h5>
         </Card>
       </div>
     );

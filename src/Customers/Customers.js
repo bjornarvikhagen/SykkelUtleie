@@ -12,6 +12,7 @@ export default class Customers extends Component {
     return (
       <div>
         <Card title="Customers">
+          <Button.Success onClick={this.new}>New Customer</Button.Success>
           <List>
             {this.customers.map(customer => (
               <List.Item key={customer.CustomerID} to={'/customers/' + customer.CustomerID}>
@@ -20,7 +21,6 @@ export default class Customers extends Component {
             ))}
           </List>
         </Card>
-        <Button.Success onClick={this.new}>New Customer</Button.Success>
       </div>
     );
   }
