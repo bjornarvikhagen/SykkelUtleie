@@ -49,20 +49,22 @@ export default class BookingDetails extends Component {
           <h5> Rented Bikes: </h5>
           {this.FK_BikeID.map(bikes => (
             <List.Item key={bikes.FK_BikeID}>
-              {' '}
               ID: {bikes.FK_BikeID} - {bikes.Brand} - {bikes.Name} - {bikes.Price}kr /day
+              {console.log(this.FK_BikeID)}
             </List.Item>
           ))}
+
           <br />
           <h5> Rented Accessory: </h5>
           {this.AccessoryID.map(acc => (
             <List.Item key={acc.FK_AccessoryID}>
-              {' '}
               ID: {acc.FK_AccessoryID} - {acc.Name} - {acc.Price}kr /day
+              {console.log(this.AccessoryID)}
             </List.Item>
           ))}
           <br />
           <h5>Price:</h5>
+          <span id="pris" />
         </Card>
       </div>
     );
@@ -79,6 +81,14 @@ export default class BookingDetails extends Component {
     bookingService.getRentedAccessories(this.props.match.params.id, AccessoryID => {
       this.AccessoryID = AccessoryID;
     });
+    let totalpris = 0;
+
+    setTimeout(() => {
+      this.FK_BikeID.forEach(el => (totalpris += el.Price));
+      this.AccessoryID.forEach(el => (totalpris += el.Price));
+
+      document.getElementById('pris').innerHTML = totalpris;
+    }, 1000);
   }
 
   back() {
