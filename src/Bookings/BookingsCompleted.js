@@ -6,15 +6,13 @@ import { Card, List, Row, Column, NavBar, Button, Form } from '../widgets';
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
-export default class Bookings extends Component {
+export default class BookingsCompleted extends Component {
   rentals = [];
   render() {
     return (
       <div>
-        <Card title="Active Bookings">
-          <Button.Success onClick={this.new}>New Booking</Button.Success>
-          <Button.Success onClick={this.completed}>See Completed Bookings</Button.Success>
-
+        <Button.Light onClick={this.back}>Back</Button.Light>
+        <Card title="Completed Bookings">
           <List>
             {this.rentals.map(rental => (
               <List.Item key={rental.RentalID} to={'/bookings/' + rental.RentalID}>
@@ -28,15 +26,11 @@ export default class Bookings extends Component {
     );
   }
   mounted() {
-    bookingService.getActiveBookings(rentals => {
+    bookingService.getCompletedBookings(rentals => {
       this.rentals = rentals;
     });
   }
-  new() {
-    history.push('/bookings_customer');
-  }
-
-  completed() {
-    history.push('/bookings_completed/');
+  back() {
+    history.push('/bookings/');
   }
 }

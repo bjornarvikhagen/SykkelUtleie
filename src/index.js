@@ -42,6 +42,7 @@ import BikeNew from './Bikes/BikeNew';
 
 //BOOKINGS
 import Bookings from './Bookings/Bookings';
+import BookingsCompleted from './Bookings/BookingsCompleted';
 import BookingDetails from './Bookings/BookingDetails';
 import BookingNew from './Bookings/BookingNew';
 import BookingsCustomer from './Bookings/BookingsCustomer';
@@ -71,6 +72,7 @@ ReactDOM.render(
       <Route exact path="/bookings/:id" component={BookingDetails} />
       <Route exact path="/bookings_customer/" component={BookingsCustomer} />
       <Route exact path="/bookings/:id/return" component={BookingReturn} />
+      <Route exact path="/bookings_completed/" component={BookingsCompleted} />
       <Route exact path="/new_booking/:id" component={BookingNew} />
       <Route exact path="/locations/" component={Locations} />
       <Route exact path="/locations/:id" component={LocationDetails} />

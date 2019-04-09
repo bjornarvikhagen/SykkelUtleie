@@ -192,12 +192,25 @@ class BikeService {
 }
 
 class BookingService {
-  getBookings(success) {
-    connection.query('select * from Rentals r, Customer c where r.FK_CustomerID = c.CustomerID', (error, results) => {
-      if (error) return console.error(error);
+  getActiveBookings(success) {
+    connection.query(
+      'select * from Rentals r, Customer c where r.FK_CustomerID = c.CustomerID and RentalStatus = "Active"',
+      (error, results) => {
+        if (error) return console.error(error);
 
-      success(results);
-    });
+        success(results);
+      }
+    );
+  }
+  getCompletedBookings(success) {
+    connection.query(
+      'select * from Rentals r, Customer c where r.FK_CustomerID = c.CustomerID and RentalStatus = "Completed"',
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
+      }
+    );
   }
   getBooking(RentalID, success) {
     connection.query(
