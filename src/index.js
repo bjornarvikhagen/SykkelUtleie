@@ -24,7 +24,11 @@ class Menu extends Component {
 
 class Home extends Component {
   render() {
-    return <Card title="Welcome">Welcome to RallRall</Card>;
+    return (<div className="imgbg">
+        <div className="centertext">Welcome to the GoGoBike system!</div>
+        <img src="../public/rallarvegen.jpg" id="rallarimg"></img>
+    </div>
+  );
   }
 }
 

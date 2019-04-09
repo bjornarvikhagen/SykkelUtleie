@@ -80,13 +80,13 @@ export class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-sm bg-light navbar-light">
+      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         {
           <NavLink className="navbar-brand" activeClassName="active" exact to="/">
             {this.props.brand}
           </NavLink>
         }
-        <ul className="navbar-nav">{this.props.children}</ul>
+        <ul className="navbar-nav ml-auto">{this.props.children}</ul>
       </nav>
     );
   }

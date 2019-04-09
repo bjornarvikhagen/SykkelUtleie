@@ -1,0 +1,31 @@
+body {
+ font-family: 'Oswald', sans-serif;
+}
+
+#rallarimg {
+ width: 100%;
+ height: auto;
+}
+
+#title {
+ color:black;
+}
+
+.imgbg {
+ width: 100%;
+ text-align: center;
+ position: relative;
+ display: inline-block;
+ position: fixed;
+}
+
+.centertext {
+ position: absolute;
+ top: 20%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ color: white;
+ font-style: oblique;
+ font-size: 2em;
+ font-weight: bold;
+}
