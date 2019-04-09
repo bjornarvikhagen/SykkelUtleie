@@ -320,6 +320,12 @@ class BookingService {
       if (error) return console.error(error);
     });
   }
+
+  pay(RentalID) {
+    connection.query('update Rentals set PaymentStatus = "Paid" where RentalID = ?', [RentalID], (error, results) => {
+      if (error) return console.error(error);
+    });
+  }
 }
 
 class LocationService {

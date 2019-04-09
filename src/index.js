@@ -12,9 +12,9 @@ class Menu extends Component {
   render() {
     return (
       <NavBar brand="AS SykkelUtleie">
-        <NavBar.Link to="/customers">Customers</NavBar.Link>
-        <NavBar.Link to="/bikes">Bikes</NavBar.Link>
         <NavBar.Link to="/bookings">Bookings</NavBar.Link>
+        <NavBar.Link to="/bikes">Bikes</NavBar.Link>
+        <NavBar.Link to="/customers">Customers</NavBar.Link>
         <NavBar.Link to="/locations">Locations</NavBar.Link>
         <NavBar.Link to="/maintenance">Maintenance</NavBar.Link>
       </NavBar>

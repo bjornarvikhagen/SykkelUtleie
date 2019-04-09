@@ -45,6 +45,13 @@ export default class BookingDetails extends Component {
             <Column width={2}>DropoffID:</Column>
             <Column>{this.rental.FK_DropoffID}</Column>
           </Row>
+          <Row>
+            <Column width={2}>Payment status:</Column>
+            <Column>
+              {this.rental.PaymentStatus} <Button.Success onClick={this.pay}>Update to Paid</Button.Success>
+            </Column>
+          </Row>
+
           <br />
           <h5> Rented Bikes: </h5>
           {this.FK_BikeID.map(bikes => (
@@ -89,6 +96,13 @@ export default class BookingDetails extends Component {
 
       document.getElementById('pris').innerHTML = totalpris;
     }, 1000);
+  }
+
+  pay() {
+    bookingService.pay(this.props.match.params.id, rentals => {
+      this.pay = rentals.PaymentStatus;
+    });
+    this.mounted();
   }
 
   back() {
