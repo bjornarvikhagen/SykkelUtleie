@@ -75,7 +75,7 @@ export default class Locations extends Component {
           </Row>
           <Row>
             <Column>
-              <select id="DropOff" value={this.FK_DropoffID} onChange={e => (this.FK_DropoffID = e.target.value)}>
+              <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
                 <option value={0}>Choose location..</option>
                 <option value={1}>Haugastøl</option>
                 <option value={2}>Finse </option>
@@ -88,53 +88,53 @@ export default class Locations extends Component {
               <Button.Success onClick={this.sendBikes1}>Send to location</Button.Success>
             </Column>
             <Column>
-              <select id="DropOff" value={this.FK_DropoffID} onChange={e => (this.FK_DropoffID = e.target.value)}>
-                <option value={0}>Choose location..</option>
-                <option value={1}>Haugastøl</option>
-                <option value={2}>Finse </option>
-                <option value={3}>Flåm </option>
-                <option value={4}>Voss </option>
-                <option value={5}>Myrdal </option>
-              </select>
+            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+              <option value={0}>Choose location..</option>
+              <option value={1}>Haugastøl</option>
+              <option value={2}>Finse </option>
+              <option value={3}>Flåm </option>
+              <option value={4}>Voss </option>
+              <option value={5}>Myrdal </option>
+            </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes2}>Send to location</Button.Success>
             </Column>
             <Column>
-              <select id="DropOff" value={this.FK_DropoffID} onChange={e => (this.FK_DropoffID = e.target.value)}>
-                <option value={0}>Choose location..</option>
-                <option value={1}>Haugastøl</option>
-                <option value={2}>Finse </option>
-                <option value={3}>Flåm </option>
-                <option value={4}>Voss </option>
-                <option value={5}>Myrdal </option>
-              </select>
+            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+              <option value={0}>Choose location..</option>
+              <option value={1}>Haugastøl</option>
+              <option value={2}>Finse </option>
+              <option value={3}>Flåm </option>
+              <option value={4}>Voss </option>
+              <option value={5}>Myrdal </option>
+            </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes3}>Send to location</Button.Success>
             </Column>
             <Column>
-              <select id="DropOff" value={this.FK_DropoffID} onChange={e => (this.FK_DropoffID = e.target.value)}>
-                <option value={0}>Choose location..</option>
-                <option value={1}>Haugastøl</option>
-                <option value={2}>Finse </option>
-                <option value={3}>Flåm </option>
-                <option value={4}>Voss </option>
-                <option value={5}>Myrdal </option>
-              </select>
+            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+              <option value={0}>Choose location..</option>
+              <option value={1}>Haugastøl</option>
+              <option value={2}>Finse </option>
+              <option value={3}>Flåm </option>
+              <option value={4}>Voss </option>
+              <option value={5}>Myrdal </option>
+            </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes4}>Send to location</Button.Success>
             </Column>
             <Column>
-              <select id="DropOff" value={this.FK_DropoffID} onChange={e => (this.FK_DropoffID = e.target.value)}>
-                <option value={0}>Choose location..</option>
-                <option value={1}>Haugastøl</option>
-                <option value={2}>Finse </option>
-                <option value={3}>Flåm </option>
-                <option value={4}>Voss </option>
-                <option value={5}>Myrdal </option>
-              </select>
+            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+              <option value={0}>Choose location..</option>
+              <option value={1}>Haugastøl</option>
+              <option value={2}>Finse </option>
+              <option value={3}>Flåm </option>
+              <option value={4}>Voss </option>
+              <option value={5}>Myrdal </option>
+            </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes5}>Send to location</Button.Success>
@@ -146,10 +146,14 @@ export default class Locations extends Component {
   }
 
   mounted() {
+    locationService.getBikesLocation(FK_Location => {
+      this.FK_Location = FK_Location;
+    });
     locationService.getBikesLocation1(bikes1 => {
       for (let bike of bikes1) bike.checked = false;
       this.bikes1 = bikes1;
     });
+
     locationService.getBikesLocation2(bikes2 => {
       for (let bike of bikes2) bike.checked = false;
       this.bikes2 = bikes2;

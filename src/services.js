@@ -372,6 +372,13 @@ class BookingService {
 }
 
 class LocationService {
+  getBikesLocation(success) {
+    connection.query('select * from Bike', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
   getBikesLocation1(success) {
     connection.query('select * from Bike where FK_Location = 1', (error, results) => {
       if (error) return console.error(error);
