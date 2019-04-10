@@ -37,6 +37,7 @@ body {
   position: absolute;
   top: 35%;
   left: 38%;
+  pointer-events: none;
 }
 
 .clock {
