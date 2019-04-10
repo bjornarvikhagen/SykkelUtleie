@@ -118,14 +118,6 @@ export default class BookingNew extends Component {
           </List>
           <br />
           <Button.Light onClick={this.removeAcc}>Remove Accessory</Button.Light>
-          <br />
-          <Form.Label>InnvoiceID:</Form.Label>
-          <Form.Input
-            type="number"
-            id="inid"
-            value={this.FK_InvoiceID}
-            onChange={e => (this.FK_InvoiceID = e.target.value)}
-          />
           <br /> <br />
         </Card>
         <Button.Success onClick={this.save}>Save</Button.Success>

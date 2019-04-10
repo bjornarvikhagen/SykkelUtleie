@@ -340,11 +340,11 @@ class BookingService {
     });
   }
 
-  // updateBikeLocation(FK_Location, BikeID) {
-  //   connection.query('update Bike set FK_Location =? where BikeID = ?', [FK_Location, BikeID], (error, results) => {
-  //     if (error) return console.error(error);
-  //   });
-  // }
+  updateBikeLocation(BikeID) {
+    connection.query('update Bike set FK_Location =? where BikeID = ? )', [BikeID], (error, results) => {
+      if (error) return console.error(error);
+    });
+  }
 
   changeRentalStatus(RentalID) {
     connection.query(
@@ -404,6 +404,18 @@ class LocationService {
 
       success(results[0]);
     });
+  }
+
+  updateBikeLocation(RentalID) {
+    connection.query(
+      'update Bike inner join RentedBikes on RentedBikes.FK_BikeID = Bike.BikeID inner join Rentals on Rentals.RentalID = RentedBikes.RentalID set Bike.FK_Location = Rentals.FK_DropoffID where Rentals.RentalID = ?',
+      [RentalID],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        console.log(results);
+      }
+    );
   }
 }
 

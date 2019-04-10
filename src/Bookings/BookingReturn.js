@@ -10,6 +10,7 @@ export default class BookingReturn extends Component {
   rental = [];
   FK_BikeID = [];
   AccessoryID = [];
+  BikeLocation = '';
   render() {
     return (
       <div>
@@ -50,6 +51,7 @@ export default class BookingReturn extends Component {
   mounted() {
     bookingService.getBooking(this.props.match.params.id, rental => {
       this.rental = rental;
+      console.log(this.rental);
     });
     bookingService.getRentedBikes(this.props.match.params.id, FK_BikeID => {
       this.FK_BikeID = FK_BikeID;
@@ -61,10 +63,12 @@ export default class BookingReturn extends Component {
     });
   }
   register() {
-    // bookingService.updateBikeLocation(this.rental.FK_DropoffID, this.rental.FK_BikeID, FK_DropoffID, BikeID => {
-    //   this.rental.FK_DropoffID = FK_DropoffID;
-    //   this.rental.FK_BikeID = BikeID;
-    // });
+    locationService.updateBikeLocation(this.props.match.params.id, location, () => {
+      this.BikeLocation = location;
+    });
+    console.log(this.rental.RentalID);
+    console.log(this.rental.FK_DropoffID);
+    console.log(this.FK_BikeID);
 
     bookingService.changeRentalStatus(this.props.match.params.id, rental => {
       this.RentalID = rental.RentalID;
