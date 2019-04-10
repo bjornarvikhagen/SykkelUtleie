@@ -146,6 +146,7 @@ class BikeService {
     });
   }
 
+  // Method to fetch all the bikes with a Status=1 from the database
   getBikesS1(success) {
     connection.query('select * from Bike where Status = 1', (error, results) => {
       if (error) return console.error(error);
@@ -153,6 +154,8 @@ class BikeService {
       success(results);
     });
   }
+
+  // Method to fetch all the bikes with a Status=2 from the database
   getBikesS2(success) {
     connection.query('select * from Bike where Status = 2', (error, results) => {
       if (error) return console.error(error);
@@ -160,6 +163,8 @@ class BikeService {
       success(results);
     });
   }
+
+  // Method to update every bikes status
   moveBike(Status, BikeID, success) {
     connection.query('UPDATE Bike SET Status = ? WHERE BikeID = ?', [Status, BikeID], (error, results) => {
       if (error) return console.error(error);
@@ -167,6 +172,8 @@ class BikeService {
       success();
     });
   }
+
+  // This method updates the Status and Information of the chosen BikeID
   moveBike1(Status, Information, BikeID, success) {
     connection.query(
       'UPDATE Bike SET Status = ?, Information = ? WHERE BikeID = ?',
@@ -178,6 +185,8 @@ class BikeService {
       }
     );
   }
+
+  // This method updates the Status and Information of the chosen BikeID
   moveBike2(Status, Information, BikeID, success) {
     connection.query(
       'UPDATE Bike SET Status = ?, Information = " " WHERE BikeID = ?',
