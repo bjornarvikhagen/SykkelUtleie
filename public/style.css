@@ -24,11 +24,23 @@ body {
 
 .centertext {
  position: absolute;
- top: 30%;
+ top: 27%;
  left: 50%;
  transform: translate(-50%, -50%);
  color: white;
  font-style: oblique;
- font-size: 2em;
+ font-size: 2.5em;
  font-weight: bold;
+}
+
+.iframebg {
+  position: absolute;
+  top: 35%;
+  left: 38%;
+  pointer-events: none;
+}
+
+.clock {
+  width: 214px;
+  height: 34px;
 }
