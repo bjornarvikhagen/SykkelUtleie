@@ -26,7 +26,7 @@ class Home extends Component {
   render() {
     return (<div className="imgbg">
         <div className="centertext">Welcome to the GoGoBike system!</div>
-        <img src="../public/rallarvegen.jpg" id="rallarimg"></img>
+        <img src="http://s1.1zoom.me/big0/298/Men_Mountains_Lake_493453.jpg" id="rallarimg"></img>
     </div>
   );
   }
