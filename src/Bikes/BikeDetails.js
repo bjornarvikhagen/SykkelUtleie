@@ -6,14 +6,16 @@ import { Card, List, Row, Column, NavBar, Button, Form } from '../widgets';
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
+// Shows the details of the spesific bike you clicked on
 export default class BikeDetails extends Component {
   bike = null;
 
   render() {
     if (!this.bike) return null;
-
+    // returns all information stored about the bike you cliked from the database
     return (
       <div>
+        {/* Button that takes you back to the list of all bikes */}
         <Button.Light onClick={this.back}>Back</Button.Light>
         <Card title="Bike details">
           <Row>
@@ -55,27 +57,32 @@ export default class BikeDetails extends Component {
         </Card>
         <Row>
           <Column>
+            {/*Button that takes you to the page you can update the bike status, calls the edit method */}
             <Button.Light onClick={this.edit}>Update bike status</Button.Light>
           </Column>
           <Column right>
+            {/* Button that deletes this spesific bike from the database calls the delete method*/}
             <Button.Danger onClick={this.delete}>Delete</Button.Danger>
           </Column>
         </Row>
       </div>
     );
   }
-
+  // collects the information about the bike you clicked from the database
   mounted() {
     bikeService.getBike(this.props.match.params.id, bike => {
       this.bike = bike;
     });
   }
+  // takes you to the edit page when edit button is pushed
   edit() {
     history.push('/bikes/' + this.bike.BikeID + '/edit');
   }
+  // takes you back to list of bikes when back-button is pushed
   back() {
     history.push('/bikes/');
   }
+  // runs when delete-button is pushed and removes the bike from the database
   delete() {
     bikeService.deleteBike(this.props.match.params.id, () => history.push('/bikes'));
   }

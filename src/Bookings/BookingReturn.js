@@ -63,6 +63,7 @@ export default class BookingReturn extends Component {
     });
   }
   register() {
+    history.push('/bookings');
     locationService.updateBikeLocation(this.props.match.params.id, location, () => {
       this.BikeLocation = location;
     });

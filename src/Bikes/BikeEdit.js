@@ -11,7 +11,7 @@ export default class BikeEdit extends Component {
 
   render() {
     if (!this.bike) return null;
-
+    // Returns the information needed about the bike to update the status
     return (
       <div>
         <Card title="Update status">
@@ -26,28 +26,30 @@ export default class BikeEdit extends Component {
         </Card>
         <Row>
           <Column>
+            {/* calls the save method */}
             <Button.Success onClick={this.save}>Save</Button.Success>
           </Column>
           <Column right>
+            {/*calls the cancel method */}
             <Button.Light onClick={this.cancel}>Cancel</Button.Light>
           </Column>
         </Row>
       </div>
     );
   }
-
+  // gets the information about the spesific bike clicked on
   mounted() {
     bikeService.getBike(this.props.match.params.id, bike => {
       this.bike = bike;
     });
   }
-
+  // saves the information that has been changed to the database
   save() {
     bikeService.updateBike(this.bike, () => {
       history.push('/bikes/' + this.props.match.params.id);
     });
   }
-
+  // cancel the change and takes you back to the details page
   cancel() {
     history.push('/bikes/' + this.props.match.params.id);
   }
