@@ -17,6 +17,7 @@ export default class CustomerNew extends Component {
   Country = '';
 
   render() {
+    // Returns the input-fields requierd to add a new Customer to the databse
     return (
       <div>
         <Card title="New Customer">
@@ -37,10 +38,12 @@ export default class CustomerNew extends Component {
           <Form.Label>Country:</Form.Label>
           <Form.Input type="text" value={this.Country} onChange={e => (this.Country = e.target.value)} />
         </Card>
+        {/*Calls the method that saves this information to the database */}
         <Button.Success onClick={this.save}>Save</Button.Success>
       </div>
     );
   }
+  //Saves the information from the input-fields to the database
   save() {
     history.push('/customers');
     customerService.newCustomer(

@@ -6,7 +6,7 @@ import { Card, List, Row, Column, NavBar, Button, Form } from '../widgets';
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
-// Shows the details of the spesific bike you clicked on
+// Shows the details of the specific bike you clicked on
 export default class BikeDetails extends Component {
   bike = null;
 
@@ -61,7 +61,7 @@ export default class BikeDetails extends Component {
             <Button.Light onClick={this.edit}>Update bike status</Button.Light>
           </Column>
           <Column right>
-            {/* Button that deletes this spesific bike from the database calls the delete method*/}
+            {/* Button that deletes this specific bike from the database calls the delete method*/}
             <Button.Danger onClick={this.delete}>Delete</Button.Danger>
           </Column>
         </Row>

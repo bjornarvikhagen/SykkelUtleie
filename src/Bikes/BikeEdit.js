@@ -37,7 +37,7 @@ export default class BikeEdit extends Component {
       </div>
     );
   }
-  // gets the information about the spesific bike clicked on
+  // gets the information about the specific bike clicked on
   mounted() {
     bikeService.getBike(this.props.match.params.id, bike => {
       this.bike = bike;

@@ -12,6 +12,7 @@ export default class BookingReturn extends Component {
   AccessoryID = [];
   BikeLocation = '';
   render() {
+    // Returns the information needed to return a booking
     return (
       <div>
         <Card title="Register Return">
@@ -24,6 +25,7 @@ export default class BookingReturn extends Component {
             <Column>{this.rental.FK_DropoffID}</Column>
           </Row>
           <br />
+          {/*Gets all the bikes in this rental  */}
           <h5> Rented Bikes: </h5>
           {this.FK_BikeID.map(bikes => (
             <List.Item key={bikes.FK_BikeID}>
@@ -32,6 +34,7 @@ export default class BookingReturn extends Component {
             </List.Item>
           ))}
           <br />
+          {/*Gets all accessories in this rental */}
           <h5> Rented Accessory: </h5>
           {this.AccessoryID.map(acc => (
             <List.Item key={acc.FK_AccessoryID}>
@@ -40,6 +43,7 @@ export default class BookingReturn extends Component {
             </List.Item>
           ))}
           <br />
+          {/* calls the register method*/}
           <Button.Success big onClick={this.register}>
             Register Return
           </Button.Success>
@@ -47,7 +51,7 @@ export default class BookingReturn extends Component {
       </div>
     );
   }
-
+  // Gets the information about the booking from the database for this ID
   mounted() {
     bookingService.getBooking(this.props.match.params.id, rental => {
       this.rental = rental;
@@ -62,6 +66,7 @@ export default class BookingReturn extends Component {
       console.log(this.AccessoryID);
     });
   }
+  // sets the booking status to completed and updates the location for the bike
   register() {
     history.push('/bookings');
     locationService.updateBikeLocation(this.props.match.params.id, location, () => {
