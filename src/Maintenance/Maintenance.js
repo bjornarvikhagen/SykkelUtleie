@@ -41,8 +41,7 @@ export default class Maintenance extends Component {
               <List>
                 {this.bikes2.map(bike2 => (
                   <List.Item key={bike2.BikeID}>
-                    {bike2.BikeID}, {bike2.Brand}, Status: {bike2.Status}, <br></br>
-                    {bike2.Information}
+                    {bike2.BikeID}, {bike2.Brand}, Status: {bike2.Status}, Info: {bike2.Information}<br></br>
 
                     {/* When button is pushed, the chosen Bike2 will move to Bike1 array */}
                     <Button.Success id={bike2.BikeID} value={bike2.BikeID} small onClick={() => this.move2(1, bike2.BikeID)}>
