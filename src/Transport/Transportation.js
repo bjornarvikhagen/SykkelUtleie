@@ -91,6 +91,7 @@ export default class Transport extends Component {
               <br />
               <Button.Success onClick={this.sendBikes1}>Send to location</Button.Success>
             </Column>
+            {/*Option value lists with the different places you can transport to, and a button that sends the checked bikes */}
             <Column>
               <br />
               <select id="Location2" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
@@ -105,6 +106,7 @@ export default class Transport extends Component {
               <br />
               <Button.Success onClick={this.sendBikes2}>Send to location</Button.Success>
             </Column>
+            {/*Option value lists with the different places you can transport to, and a button that sends the checked bikes */}
             <Column>
               <br />
               <select id="Location3" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
@@ -119,6 +121,7 @@ export default class Transport extends Component {
               <br />
               <Button.Success onClick={this.sendBikes3}>Send to location</Button.Success>
             </Column>
+            {/*Option value lists with the different places you can transport to, and a button that sends the checked bikes */}
             <Column>
               <br />
               <select id="Location4" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
@@ -133,6 +136,7 @@ export default class Transport extends Component {
               <br />
               <Button.Success onClick={this.sendBikes4}>Send to location</Button.Success>
             </Column>
+            {/*Option value lists with the different places you can transport to, and a button that sends the checked bikes */}
             <Column>
               <br />
               <select id="Location5" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
@@ -229,7 +233,7 @@ export default class Transport extends Component {
   }
   //Method that sends the bikes to a new location when the bikes are checked and location choosen. And then runs the mounted method again
   sendBikes5() {
-    for (let x = 0; x < this.bikes1.length; x++) {
+    for (let x = 0; x < this.bikes5.length; x++) {
       if (this.bikes5[x].checked == true) {
         console.log(this.bikes5[x].BikeID);
         document.getElementById('Location5').value = this.FK_Location;
