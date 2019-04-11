@@ -76,6 +76,7 @@ export default class Transport extends Component {
           </Row>
           <Row>
             <Column>
+              <br />
               <select id="Location1" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
                 <option>Choose location..</option>
                 <option value={1}>Haugastøl</option>
@@ -89,8 +90,9 @@ export default class Transport extends Component {
               <Button.Success onClick={this.sendBikes1}>Send to location</Button.Success>
             </Column>
             <Column>
+              <br />
               <select id="Location2" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-                <option value={0}>Choose location..</option>
+                <option>Choose location..</option>
                 <option value={1}>Haugastøl</option>
                 <option value={2}>Finse </option>
                 <option value={3}>Flåm </option>
@@ -102,8 +104,9 @@ export default class Transport extends Component {
               <Button.Success onClick={this.sendBikes2}>Send to location</Button.Success>
             </Column>
             <Column>
+              <br />
               <select id="Location3" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-                <option value={0}>Choose location..</option>
+                <option>Choose location..</option>
                 <option value={1}>Haugastøl</option>
                 <option value={2}>Finse </option>
                 <option value={3}>Flåm </option>
@@ -115,8 +118,9 @@ export default class Transport extends Component {
               <Button.Success onClick={this.sendBikes3}>Send to location</Button.Success>
             </Column>
             <Column>
+              <br />
               <select id="Location4" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-                <option value={0}>Choose location..</option>
+                <option>Choose location..</option>
                 <option value={1}>Haugastøl</option>
                 <option value={2}>Finse </option>
                 <option value={3}>Flåm </option>
@@ -128,8 +132,9 @@ export default class Transport extends Component {
               <Button.Success onClick={this.sendBikes4}>Send to location</Button.Success>
             </Column>
             <Column>
+              <br />
               <select id="Location5" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-                <option value={0}>Choose location..</option>
+                <option>Choose location..</option>
                 <option value={1}>Haugastøl</option>
                 <option value={2}>Finse </option>
                 <option value={3}>Flåm </option>
