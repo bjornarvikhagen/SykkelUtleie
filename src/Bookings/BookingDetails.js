@@ -82,15 +82,29 @@ export default class BookingDetails extends Component {
           {/* Shows the total price for the rental */}
           <h5>Price:</h5>
           <span id="pris" />
+          <br />
         </Card>
       </div>
     );
   }
 
-  // Gets all information needed when the page loads, information about the rental, bikes, price and accessory
+  // Gets all information needed when the page loads, information about the rental, bikes, price and accessory and counts total days of the rental
   mounted() {
     bookingService.getBooking(this.props.match.params.id, rental => {
       this.rental = rental;
+
+      let startdate = Date.parse(JSON.stringify(this.rental.StartDate).replace(/\"/g, ''));
+      let enddate = Date.parse(JSON.stringify(this.rental.EndDate).replace(/\"/g, ''));
+      let rentaldays = parseInt(enddate / 8.64e7) - parseInt(startdate / 8.64e7);
+      let totalpris = 0;
+      console.log(rentaldays);
+
+      setTimeout(() => {
+        this.FK_BikeID.forEach(el => (totalpris += el.Price));
+        this.AccessoryID.forEach(el => (totalpris += el.Price));
+
+        document.getElementById('pris').innerHTML = Math.abs(totalpris * rentaldays);
+      }, 1000);
     });
 
     bookingService.getRentedBikes(this.props.match.params.id, FK_BikeID => {
@@ -99,15 +113,8 @@ export default class BookingDetails extends Component {
     bookingService.getRentedAccessories(this.props.match.params.id, AccessoryID => {
       this.AccessoryID = AccessoryID;
     });
-    let totalpris = 0;
-
-    setTimeout(() => {
-      this.FK_BikeID.forEach(el => (totalpris += el.Price));
-      this.AccessoryID.forEach(el => (totalpris += el.Price));
-
-      document.getElementById('pris').innerHTML = totalpris;
-    }, 1000);
   }
+
   // Updates the paymentstatus of the booking when pressed
   pay() {
     bookingService.pay(this.props.match.params.id, rentals => {
