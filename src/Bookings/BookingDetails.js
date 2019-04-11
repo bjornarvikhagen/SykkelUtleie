@@ -85,6 +85,13 @@ export default class BookingDetails extends Component {
   mounted() {
     bookingService.getBooking(this.props.match.params.id, rental => {
       this.rental = rental;
+
+      let startdate = Date.parse(JSON.stringify(this.rental.StartDate).replace(/\"/g, ''));
+      let enddate = Date.parse(JSON.stringify(this.rental.EndDate).replace(/\"/g, ''));
+
+      console.log(startdate / 8.64e7);
+      console.log(enddate / 8.64e7);
+      console.log(enddate / 8.64e7 - startdate / 8.64e7);
     });
 
     bookingService.getRentedBikes(this.props.match.params.id, FK_BikeID => {
@@ -93,6 +100,7 @@ export default class BookingDetails extends Component {
     bookingService.getRentedAccessories(this.props.match.params.id, AccessoryID => {
       this.AccessoryID = AccessoryID;
     });
+
     let totalpris = 0;
 
     setTimeout(() => {
