@@ -15,7 +15,7 @@ class Menu extends Component {
         <NavBar.Link to="/bookings">Bookings</NavBar.Link>
         <NavBar.Link to="/bikes">Bikes</NavBar.Link>
         <NavBar.Link to="/customers">Customers</NavBar.Link>
-        <NavBar.Link to="/locations">Locations</NavBar.Link>
+        <NavBar.Link to="/transportation">Transportation</NavBar.Link>
         <NavBar.Link to="/maintenance">Maintenance</NavBar.Link>
       </NavBar>
     );
@@ -61,8 +61,7 @@ import BookingsCustomer from './Bookings/BookingsCustomer';
 import BookingReturn from './Bookings/BookingReturn';
 
 //LOCATIONS
-import Locations from './Locations/Locations';
-import LocationDetails from './Locations/LocationDetails';
+import Transport from './Transport/Transportation';
 
 //MAINTENANCE
 import Maintenance from './Maintenance/Maintenance';
@@ -86,8 +85,7 @@ ReactDOM.render(
       <Route exact path="/bookings/:id/return" component={BookingReturn} />
       <Route exact path="/bookings_completed/" component={BookingsCompleted} />
       <Route exact path="/new_booking/:id" component={BookingNew} />
-      <Route exact path="/locations/" component={Locations} />
-      <Route exact path="/locations/:id" component={LocationDetails} />
+      <Route exact path="/transportation/" component={Transport} />
       <Route exact path="/maintenance" component={Maintenance} />
     </div>
   </HashRouter>,

@@ -6,7 +6,7 @@ import { Card, List, Row, Column, NavBar, Button, Form } from '../widgets';
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
-export default class Locations extends Component {
+export default class Transport extends Component {
   bikes1 = [];
   bikes2 = [];
   bikes3 = [];
@@ -16,7 +16,7 @@ export default class Locations extends Component {
   render() {
     return (
       <div>
-        <Card title="Locations">
+        <Card title="Transportation">
           <Row>
             <Column>
               <p>1 - Haugastøl</p>
