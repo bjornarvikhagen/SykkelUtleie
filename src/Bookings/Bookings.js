@@ -14,11 +14,11 @@ export default class Bookings extends Component {
       <div>
         <Card title="Active Bookings">
           {/*Button that call the new method thats takes you to the new booking page */}
-          <Button.Success onClick={this.new}>New Booking</Button.Success>
+        <br/>  <Button.Success onClick={this.new}>New Booking</Button.Success>
           {/*Button that takes you to the page with completed bookings */}
-          <Button.Success onClick={this.completed}>See Completed Bookings</Button.Success>
+        <br/> <br/> <Button.Success onClick={this.completed}>See Completed Bookings</Button.Success>
           {/*List of all active rented */}
-          <List>
+          <List><br/>
             {this.rentals.map(rental => (
               <List.Item key={rental.RentalID} to={'/bookings/' + rental.RentalID}>
                 ID {rental.RentalID} - FROM {JSON.stringify(rental.StartDate).slice(0, 11)} TO{' '}

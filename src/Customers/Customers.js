@@ -14,7 +14,7 @@ export default class Customers extends Component {
       <div>
         <Card title="Customers">
           {/* Button that calls the new() method that takes you to the page where you can add a new Customer */}
-          <Button.Success onClick={this.new}>New Customer</Button.Success>
+          <Button.Success onClick={this.new}>New Customer</Button.Success><br/><br/>
           <List>
             {this.customers.map(customer => (
               <List.Item key={customer.CustomerID} to={'/customers/' + customer.CustomerID}>

@@ -17,7 +17,7 @@ export default class Bikes extends Component {
     return (
       <div>
         <Card title="Bikes">
-          <Button.Success onClick={this.new}>New Bike</Button.Success>
+          <Button.Success onClick={this.new}>New Bike</Button.Success><br/><br/>
           <Row>
             <Column>
               <p>1 - Mountain Bike</p>
