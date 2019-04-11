@@ -27,12 +27,16 @@ class Home extends Component {
     return (
       <div className="imgbg">
         <div className="centertext">Welcome to the GoGoBike system!</div>
-          <img src="http://s1.1zoom.me/big0/298/Men_Mountains_Lake_493453.jpg" id="rallarimg"></img>
+        <img src="http://s1.1zoom.me/big0/298/Men_Mountains_Lake_493453.jpg" id="rallarimg" />
         <div className="iframebg">
-          <iframe src="http://free.timeanddate.com/clock/i6pnpjdk/n288/fn3/fs28/fcfff/tct/pct/ftbi/tt0/tw0/tm1/td2/th1/ts1/tb1" frameborder="0" allowTransparency="true"></iframe>
+          <iframe
+            src="http://free.timeanddate.com/clock/i6pnpjdk/n288/fn3/fs28/fcfff/tct/pct/ftbi/tt0/tw0/tm1/td2/th1/ts1/tb1"
+            frameBorder="0"
+            allowtransparency="true"
+          />
         </div>
-    </div>
-  );
+      </div>
+    );
   }
 }
 

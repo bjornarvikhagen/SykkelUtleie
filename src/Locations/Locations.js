@@ -12,6 +12,7 @@ export default class Locations extends Component {
   bikes3 = [];
   bikes4 = [];
   bikes5 = [];
+
   render() {
     return (
       <div>
@@ -75,8 +76,8 @@ export default class Locations extends Component {
           </Row>
           <Row>
             <Column>
-              <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-                <option value={0}>Choose location..</option>
+              <select id="Location1" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+                <option>Choose location..</option>
                 <option value={1}>Haugastøl</option>
                 <option value={2}>Finse </option>
                 <option value={3}>Flåm </option>
@@ -88,53 +89,53 @@ export default class Locations extends Component {
               <Button.Success onClick={this.sendBikes1}>Send to location</Button.Success>
             </Column>
             <Column>
-            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-              <option value={0}>Choose location..</option>
-              <option value={1}>Haugastøl</option>
-              <option value={2}>Finse </option>
-              <option value={3}>Flåm </option>
-              <option value={4}>Voss </option>
-              <option value={5}>Myrdal </option>
-            </select>
+              <select id="Location2" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+                <option value={0}>Choose location..</option>
+                <option value={1}>Haugastøl</option>
+                <option value={2}>Finse </option>
+                <option value={3}>Flåm </option>
+                <option value={4}>Voss </option>
+                <option value={5}>Myrdal </option>
+              </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes2}>Send to location</Button.Success>
             </Column>
             <Column>
-            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-              <option value={0}>Choose location..</option>
-              <option value={1}>Haugastøl</option>
-              <option value={2}>Finse </option>
-              <option value={3}>Flåm </option>
-              <option value={4}>Voss </option>
-              <option value={5}>Myrdal </option>
-            </select>
+              <select id="Location3" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+                <option value={0}>Choose location..</option>
+                <option value={1}>Haugastøl</option>
+                <option value={2}>Finse </option>
+                <option value={3}>Flåm </option>
+                <option value={4}>Voss </option>
+                <option value={5}>Myrdal </option>
+              </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes3}>Send to location</Button.Success>
             </Column>
             <Column>
-            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-              <option value={0}>Choose location..</option>
-              <option value={1}>Haugastøl</option>
-              <option value={2}>Finse </option>
-              <option value={3}>Flåm </option>
-              <option value={4}>Voss </option>
-              <option value={5}>Myrdal </option>
-            </select>
+              <select id="Location4" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+                <option value={0}>Choose location..</option>
+                <option value={1}>Haugastøl</option>
+                <option value={2}>Finse </option>
+                <option value={3}>Flåm </option>
+                <option value={4}>Voss </option>
+                <option value={5}>Myrdal </option>
+              </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes4}>Send to location</Button.Success>
             </Column>
             <Column>
-            <select id="Location" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
-              <option value={0}>Choose location..</option>
-              <option value={1}>Haugastøl</option>
-              <option value={2}>Finse </option>
-              <option value={3}>Flåm </option>
-              <option value={4}>Voss </option>
-              <option value={5}>Myrdal </option>
-            </select>
+              <select id="Location5" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
+                <option value={0}>Choose location..</option>
+                <option value={1}>Haugastøl</option>
+                <option value={2}>Finse </option>
+                <option value={3}>Flåm </option>
+                <option value={4}>Voss </option>
+                <option value={5}>Myrdal </option>
+              </select>
               <br />
               <br />
               <Button.Success onClick={this.sendBikes5}>Send to location</Button.Success>
@@ -170,5 +171,62 @@ export default class Locations extends Component {
       for (let bike of bikes5) bike.checked = false;
       this.bikes5 = bikes5;
     });
+  }
+
+  sendBikes1() {
+    for (let x = 0; x < this.bikes1.length; x++) {
+      if (this.bikes1[x].checked == true) {
+        console.log(this.bikes1[x].BikeID);
+        document.getElementById('Location1').value = this.FK_Location;
+        console.log(this.FK_Location);
+        locationService.sendBikes(this.FK_Location, this.bikes1[x].BikeID, () => {});
+      }
+      this.mounted();
+    }
+  }
+  sendBikes2() {
+    for (let x = 0; x < this.bikes2.length; x++) {
+      if (this.bikes2[x].checked == true) {
+        console.log(this.bikes2[x].BikeID);
+        document.getElementById('Location2').value = this.FK_Location;
+        console.log(this.FK_Location);
+        locationService.sendBikes(this.FK_Location, this.bikes2[x].BikeID, () => {});
+      }
+      this.mounted();
+    }
+  }
+  sendBikes3() {
+    for (let x = 0; x < this.bikes3.length; x++) {
+      if (this.bikes3[x].checked == true) {
+        console.log(this.bikes3[x].BikeID);
+        document.getElementById('Location3').value = this.FK_Location;
+        console.log(this.FK_Location);
+        locationService.sendBikes(this.FK_Location, this.bikes3[x].BikeID, () => {});
+      }
+      this.mounted();
+    }
+  }
+
+  sendBikes4() {
+    for (let x = 0; x < this.bikes4.length; x++) {
+      if (this.bikes4[x].checked == true) {
+        console.log(this.bikes4[x].BikeID);
+        document.getElementById('Location4').value = this.FK_Location;
+        console.log(this.FK_Location);
+        locationService.sendBikes(this.FK_Location, this.bikes4[x].BikeID, () => {});
+      }
+      this.mounted();
+    }
+  }
+  sendBikes5() {
+    for (let x = 0; x < this.bikes1.length; x++) {
+      if (this.bikes5[x].checked == true) {
+        console.log(this.bikes5[x].BikeID);
+        document.getElementById('Location5').value = this.FK_Location;
+        console.log(this.FK_Location);
+        locationService.sendBikes(this.FK_Location, this.bikes5[x].BikeID, () => {});
+      }
+      this.mounted();
+    }
   }
 }

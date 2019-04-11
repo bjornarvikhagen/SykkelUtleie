@@ -438,6 +438,13 @@ class LocationService {
       }
     );
   }
+  sendBikes(FK_Location, BikeID) {
+    connection.query('update Bike set FK_Location =? where BikeID=?', [FK_Location, BikeID], (error, results) => {
+      if (error) return console.error(error);
+      console.log(FK_Location);
+      console.log(BikeID);
+    });
+  }
 }
 
 export let customerService = new CustomerService();
