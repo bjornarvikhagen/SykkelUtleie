@@ -14,6 +14,7 @@ export default class Transport extends Component {
   bikes5 = [];
 
   render() {
+    // Returns five columns with the bikes on the different locations
     return (
       <div>
         <Card title="Transportation">
@@ -75,6 +76,7 @@ export default class Transport extends Component {
             </Column>
           </Row>
           <Row>
+            {/*Option value lists with the different places you can transport to, and a button that sends the checked bikes */}
             <Column>
               <br />
               <select id="Location1" value={this.FK_Location} onChange={e => (this.FK_Location = e.target.value)}>
@@ -150,7 +152,7 @@ export default class Transport extends Component {
       </div>
     );
   }
-
+  // Gets the bikes when the page loads.
   mounted() {
     locationService.getBikesLocation(FK_Location => {
       this.FK_Location = FK_Location;
@@ -177,7 +179,7 @@ export default class Transport extends Component {
       this.bikes5 = bikes5;
     });
   }
-
+  //Method that sends the bikes to a new location when the bikes are checked and location choosen.
   sendBikes1() {
     for (let x = 0; x < this.bikes1.length; x++) {
       if (this.bikes1[x].checked == true) {
@@ -189,6 +191,7 @@ export default class Transport extends Component {
       this.mounted();
     }
   }
+  //Method that sends the bikes to a new location when the bikes are checked and location choosen. And then runs the mounted method again
   sendBikes2() {
     for (let x = 0; x < this.bikes2.length; x++) {
       if (this.bikes2[x].checked == true) {
@@ -200,6 +203,7 @@ export default class Transport extends Component {
       this.mounted();
     }
   }
+  //Method that sends the bikes to a new location when the bikes are checked and location choosen. And then runs the mounted method again
   sendBikes3() {
     for (let x = 0; x < this.bikes3.length; x++) {
       if (this.bikes3[x].checked == true) {
@@ -211,7 +215,7 @@ export default class Transport extends Component {
       this.mounted();
     }
   }
-
+  //Method that sends the bikes to a new location when the bikes are checked and location choosen. And then runs the mounted method again
   sendBikes4() {
     for (let x = 0; x < this.bikes4.length; x++) {
       if (this.bikes4[x].checked == true) {
@@ -223,6 +227,7 @@ export default class Transport extends Component {
       this.mounted();
     }
   }
+  //Method that sends the bikes to a new location when the bikes are checked and location choosen. And then runs the mounted method again
   sendBikes5() {
     for (let x = 0; x < this.bikes1.length; x++) {
       if (this.bikes5[x].checked == true) {

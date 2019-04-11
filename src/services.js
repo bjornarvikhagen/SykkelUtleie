@@ -372,6 +372,7 @@ class BookingService {
 }
 
 class LocationService {
+  // select all bikes from the database
   getBikesLocation(success) {
     connection.query('select * from Bike', (error, results) => {
       if (error) return console.error(error);
@@ -379,6 +380,7 @@ class LocationService {
       success(results);
     });
   }
+  // Selects the bikes in the database with a specific Location
   getBikesLocation1(success) {
     connection.query('select * from Bike where FK_Location = 1', (error, results) => {
       if (error) return console.error(error);
@@ -386,7 +388,7 @@ class LocationService {
       success(results);
     });
   }
-
+  // Selects the bikes in the database with a specific Location
   getBikesLocation2(success) {
     connection.query('select * from Bike where FK_Location = 2', (error, results) => {
       if (error) return console.error(error);
@@ -394,7 +396,7 @@ class LocationService {
       success(results);
     });
   }
-
+  // Selects the bikes in the database with a specific Location
   getBikesLocation3(success) {
     connection.query('select * from Bike where FK_Location = 3', (error, results) => {
       if (error) return console.error(error);
@@ -402,7 +404,7 @@ class LocationService {
       success(results);
     });
   }
-
+  // Selects the bikes in the database with a specific Location
   getBikesLocation4(success) {
     connection.query('select * from Bike where FK_Location = 4', (error, results) => {
       if (error) return console.error(error);
@@ -410,7 +412,7 @@ class LocationService {
       success(results);
     });
   }
-
+  // Selects the bikes in the database with a specific Location
   getBikesLocation5(success) {
     connection.query('select * from Bike where FK_Location = 5', (error, results) => {
       if (error) return console.error(error);
@@ -418,7 +420,7 @@ class LocationService {
       success(results);
     });
   }
-
+  // Selects all information about a specific bike
   getBike(BikeID, success) {
     connection.query('select * from Bike where BikeID = ?', [BikeID], (error, results) => {
       if (error) return console.error(error);
@@ -438,6 +440,7 @@ class LocationService {
       }
     );
   }
+  // moves the specific bikes to a new specific location
   sendBikes(FK_Location, BikeID) {
     connection.query('update Bike set FK_Location =? where BikeID=?', [FK_Location, BikeID], (error, results) => {
       if (error) return console.error(error);
