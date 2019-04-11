@@ -1,6 +1,14 @@
 /* Apply the same font to all the text elements */
 body {
- font-family: 'Oswald', sans-serif;
+ font-family: 'Helvetica', sans-serif;
+ background-color: #F5F3F3;
+}
+
+.card {
+}
+
+.list.item {
+  background-color: #F5F3F3;
 }
 
 /* Making the image always fill the entire screen */
