@@ -9,9 +9,11 @@ const history = createHashHistory(); // Use history.push(...) to programmaticall
 export default class Customers extends Component {
   customers = [];
   render() {
+    // Returns all Customers from the Customer Database and list them by CustomerID with links to details to each customer
     return (
       <div>
         <Card title="Customers">
+          {/* Button that calls the new() method that takes you to the page where you can add a new Customer */}
           <Button.Success onClick={this.new}>New Customer</Button.Success>
           <List>
             {this.customers.map(customer => (
@@ -24,12 +26,13 @@ export default class Customers extends Component {
       </div>
     );
   }
-
+  // Gets all customers from database when page loads
   mounted() {
     customerService.getCustomers(customers => {
       this.customers = customers;
     });
   }
+  // Takes you to the page where you can add a new Customer
   new() {
     history.push('/new_customer');
   }

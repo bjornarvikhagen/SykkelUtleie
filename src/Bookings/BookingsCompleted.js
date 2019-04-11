@@ -9,6 +9,7 @@ const history = createHashHistory(); // Use history.push(...) to programmaticall
 export default class BookingsCompleted extends Component {
   rentals = [];
   render() {
+    // Returns a list of all completed bookings with link to details of the booking
     return (
       <div>
         <Button.Light onClick={this.back}>Back</Button.Light>
@@ -25,11 +26,13 @@ export default class BookingsCompleted extends Component {
       </div>
     );
   }
+  // gets the rentals with status completed from the database
   mounted() {
     bookingService.getCompletedBookings(rentals => {
       this.rentals = rentals;
     });
   }
+  // takes you bavk to active bookings
   back() {
     history.push('/bookings/');
   }

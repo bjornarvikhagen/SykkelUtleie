@@ -11,9 +11,10 @@ export default class CustomerDetails extends Component {
 
   render() {
     if (!this.customer) return null;
-
+    // Returns all information about this specific customer from the database
     return (
       <div>
+        {/*Calls the back method */}
         <Button.Light onClick={this.back}>Back</Button.Light>
         <Card title="Customer details">
           <Row>
@@ -64,17 +65,21 @@ export default class CustomerDetails extends Component {
       </div>
     );
   }
+  // Gets the information about this specific customer
   mounted() {
     customerService.getCustomer(this.props.match.params.id, customer => {
       this.customer = customer;
     });
   }
+  //Takes you to the page where you can edit the information to this customer
   edit() {
     history.push('/customers/' + this.customer.CustomerID + '/edit');
   }
+  // Takes you back to the list with all customers
   back() {
     history.push('/customers/');
   }
+  // Deletes this Customer from the database
   delete() {
     customerService.deleteCustomer(this.props.match.params.id, () => history.push('/customers'));
   }

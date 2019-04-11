@@ -17,6 +17,7 @@ export default class BikeNew extends Component {
   FK_Location = '';
   FK_BikeTypeID = '';
 
+  // Returns all the input-fields needed to add a new bike to the databse
   render() {
     return (
       <div>
@@ -40,10 +41,12 @@ export default class BikeNew extends Component {
           <Form.Label>Bike type:</Form.Label>
           <Form.Input type="number" value={this.FK_BikeTypeID} onChange={e => (this.FK_BikeTypeID = e.target.value)} />
         </Card>
+        {/* Calls the add method */}
         <Button.Success onClick={this.add}>Add</Button.Success>
       </div>
     );
   }
+  // Adds a new bike to the databse with the values from the input-fields
   add() {
     history.push('/bikes');
     bikeService.newBike(

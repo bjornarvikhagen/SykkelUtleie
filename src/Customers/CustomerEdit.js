@@ -11,7 +11,7 @@ export default class CustomerEdit extends Component {
 
   render() {
     if (!this.customer) return null;
-
+    // Returns all the input-fields requierd to change a customers information
     return (
       <div>
         <Card title="Edit Customer">
@@ -54,28 +54,30 @@ export default class CustomerEdit extends Component {
         </Card>
         <Row>
           <Column>
+            {/*Calls the method that saves the information to the database */}
             <Button.Success onClick={this.save}>Save</Button.Success>
           </Column>
           <Column right>
+            {/*Calls the method cancel that takes you back to customerdetails */}
             <Button.Light onClick={this.cancel}>Cancel</Button.Light>
           </Column>
         </Row>
       </div>
     );
   }
-
+  // Gets all information about this specific customer stored in the database
   mounted() {
     customerService.getCustomer(this.props.match.params.id, customer => {
       this.customer = customer;
     });
   }
-
+  // Saves the changes from the input-fields to the databse for this CustomerID
   save() {
     customerService.updateCustomer(this.customer, () => {
       history.push('/customers/' + this.props.match.params.id);
     });
   }
-
+  // Takes you back to page with details about the customer
   cancel() {
     history.push('/customers/' + this.props.match.params.id);
   }

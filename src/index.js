@@ -15,7 +15,7 @@ class Menu extends Component {
         <NavBar.Link to="/bookings">Bookings</NavBar.Link>
         <NavBar.Link to="/bikes">Bikes</NavBar.Link>
         <NavBar.Link to="/customers">Customers</NavBar.Link>
-        <NavBar.Link to="/locations">Locations</NavBar.Link>
+        <NavBar.Link to="/transportation">Transportation</NavBar.Link>
         <NavBar.Link to="/maintenance">Maintenance</NavBar.Link>
       </NavBar>
     );
@@ -27,12 +27,16 @@ class Home extends Component {
     return (
       <div className="imgbg">
         <div className="centertext">Welcome to the GoGoBike system!</div>
-          <img src="http://s1.1zoom.me/big0/298/Men_Mountains_Lake_493453.jpg" id="rallarimg"></img>
+        <img src="http://s1.1zoom.me/big0/298/Men_Mountains_Lake_493453.jpg" id="rallarimg" />
         <div className="iframebg">
-          <iframe src="http://free.timeanddate.com/clock/i6pnpjdk/n288/fn3/fs28/fcfff/tct/pct/ftbi/tt0/tw0/tm1/td2/th1/ts1/tb1" frameborder="0" allowTransparency="true"></iframe>
+          <iframe
+            src="http://free.timeanddate.com/clock/i6pnpjdk/n288/fn3/fs28/fcfff/tct/pct/ftbi/tt0/tw0/tm1/td2/th1/ts1/tb1"
+            frameBorder="0"
+            allowtransparency="true"
+          />
         </div>
-    </div>
-  );
+      </div>
+    );
   }
 }
 
@@ -57,8 +61,7 @@ import BookingsCustomer from './Bookings/BookingsCustomer';
 import BookingReturn from './Bookings/BookingReturn';
 
 //LOCATIONS
-import Locations from './Locations/Locations';
-import LocationDetails from './Locations/LocationDetails';
+import Transport from './Transport/Transportation';
 
 //MAINTENANCE
 import Maintenance from './Maintenance/Maintenance';
@@ -82,8 +85,7 @@ ReactDOM.render(
       <Route exact path="/bookings/:id/return" component={BookingReturn} />
       <Route exact path="/bookings_completed/" component={BookingsCompleted} />
       <Route exact path="/new_booking/:id" component={BookingNew} />
-      <Route exact path="/locations/" component={Locations} />
-      <Route exact path="/locations/:id" component={LocationDetails} />
+      <Route exact path="/transportation/" component={Transport} />
       <Route exact path="/maintenance" component={Maintenance} />
     </div>
   </HashRouter>,
